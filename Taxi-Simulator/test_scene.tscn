@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://car.tscn" type="PackedScene" id=1]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.196078, 0.282353, 0.215686, 1 )
+
+[sub_resource type="PlaneShape" id=2]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
+transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0.0192623, 0, 0.0236621 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 2 )
+
+[node name="Car" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.46108, 0 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -0.753001, -0.179177, 0.633155, 0, 0.962213, 0.272297, -0.658019, 0.20504, -0.724547, 4.81283, 4.94027, -6.43447 )
