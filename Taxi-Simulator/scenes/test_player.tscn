@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/human_player_controller.tscn" type="PackedScene" id=1]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="CapsuleMesh" id=2]
+
+[sub_resource type="CubeMesh" id=3]
+
+[node name="TestPlayer" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 6.3969, 0, 0, 0, 1, 0, 0, 0, 6.3969, 0, 0, 0 )
+mesh = SubResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+
+[node name="MeshInstance" type="MeshInstance" parent="Player"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1.5, 0, -1, -6.55671e-08, 0, 2, 0 )
+mesh = SubResource( 2 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Player"]
+transform = Transform( 0.69737, 0, 0, 0, -1.33137e-08, 0.645154, 0, -0.304582, -2.82006e-08, 0, 3.22583, -0.82535 )
+mesh = SubResource( 3 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.502205, -0.328371, 0.799976, 0, 0.925097, 0.379731, -0.864748, -0.190703, 0.464589, 8.1585, 8.53744, 5.51277 )
