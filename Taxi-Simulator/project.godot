@@ -8,11 +8,31 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "Roadway",
+"language": "GDScript",
+"path": "res://addons/roadway/scripts/roadway.gd"
+}, {
+"base": "Position3D",
+"class": "Waypoint",
+"language": "GDScript",
+"path": "res://addons/roadway/scripts/waypoint.gd"
+} ]
+_global_script_class_icons={
+"Roadway": "",
+"Waypoint": ""
+}
+
 [application]
 
 config/name="Taxi-Simulator"
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/roadway/plugin.cfg" )
 
 [gui]
 
