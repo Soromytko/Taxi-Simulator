@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://city_prototype/lowpoly_city.glb" type="PackedScene" id=1]
 [ext_resource path="res://truck_town_demo/car_base.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/roadway/scripts/roadway.gd" type="Script" id=3]
+[ext_resource path="res://addons/roadway/scripts/waypoint.gd" type="Script" id=4]
+[ext_resource path="res://scenes/car_ai.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/game_closer.gd" type="Script" id=9]
 
 [sub_resource type="HeightMapShape" id=1]
 map_width = 100
@@ -10,13 +14,114 @@ map_data = PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 
 [node name="Spatial" type="Spatial"]
 
+[node name="CarBase" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8199, 7.62939e-06, -5.40592 )
+
 [node name="lowpoly_city" parent="." instance=ExtResource( 1 )]
 
 [node name="StaticBody" type="StaticBody" parent="lowpoly_city"]
+visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="lowpoly_city/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.1323, 7.62939e-06, 23.7726 )
 shape = SubResource( 1 )
 
-[node name="CarBase" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.69768, 0, -7.96615 )
+[node name="Roadway" type="Spatial" parent="."]
+script = ExtResource( 3 )
+
+[node name="Waypoint" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16062, -2.38419e-06, -8.1614 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint2")
+
+[node name="Waypoint2" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.97497, -1.90735e-06, -7.94089 )
+script = ExtResource( 4 )
+previous_waypoint_node_path = NodePath(".")
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint3")
+
+[node name="Waypoint3" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.35283, -2.38419e-06, -6.14121 )
+script = ExtResource( 4 )
+previous_waypoint_node_path = NodePath(".")
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint4")
+
+[node name="Waypoint4" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1897, 0, 2.08356 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint5")
+
+[node name="Waypoint5" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1562, 0, 11.8547 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint6")
+
+[node name="Waypoint6" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1562, 0, 24.4497 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint7")
+
+[node name="Waypoint7" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1562, 0, 38.5325 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint8")
+
+[node name="Waypoint8" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1562, 0, 50.4514 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint9")
+
+[node name="Waypoint9" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.55788, 0, 54.3457 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint10")
+
+[node name="Waypoint10" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.14344, 0, 56.2579 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint11")
+
+[node name="Waypoint11" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.55493, 0, 56.4011 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint12")
+
+[node name="Waypoint12" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.0489, 0, 56.4011 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint13")
+
+[node name="Waypoint13" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.3406, 0, 56.4011 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint14")
+
+[node name="Waypoint14" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.8803, 1.90735e-06, 60.1451 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint15")
+
+[node name="Waypoint15" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26.1721, 0, 60.574 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint16")
+
+[node name="Waypoint16" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.1491, 0, 60.4166 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint17")
+
+[node name="Waypoint17" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0876, 0, 60.4119 )
+script = ExtResource( 4 )
+next_waypoint_node_path = NodePath("/root/EditorNode/@@596/@@597/@@605/@@607/@@611/@@615/@@616/@@617/@@633/@@634/@@643/@@644/@@6618/@@6450/@@6451/@@6452/@@6453/@@6454/@@6455/Spatial/Roadway/Waypoint18")
+
+[node name="Waypoint18" type="Position3D" parent="Roadway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.14703, 0, 60.4957 )
+script = ExtResource( 4 )
+
+[node name="CarAI" parent="." instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.42118, 0.222867, -5.61485 )
+
+[node name="game_closer" type="Node" parent="."]
+script = ExtResource( 9 )
