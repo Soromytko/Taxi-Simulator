@@ -15,7 +15,7 @@ animation = "running1-loop"
 animation = "standart_walk-loop"
 
 [sub_resource type="AnimationNodeBlendTree" id=5]
-graph_offset = Vector2( -55.8767, 74.44 )
+graph_offset = Vector2( 43.1233, 31.44 )
 nodes/idle/node = SubResource( 2 )
 nodes/idle/position = Vector2( 280, 100 )
 nodes/idle_walk/node = SubResource( 1 )
@@ -25,7 +25,7 @@ nodes/run/node = SubResource( 3 )
 nodes/run/position = Vector2( 260, 340 )
 nodes/walk/node = SubResource( 4 )
 nodes/walk/position = Vector2( 60, 220 )
-node_connections = [ "idle_walk", 0, "idle", "idle_walk", 1, "run", "output", 0, "idle_walk" ]
+node_connections = [ "idle_walk", 0, "idle", "idle_walk", 1, "walk", "output", 0, "idle_walk" ]
 
 [node name="TaxiDriverCharacter" instance=ExtResource( 1 )]
 script = ExtResource( 2 )

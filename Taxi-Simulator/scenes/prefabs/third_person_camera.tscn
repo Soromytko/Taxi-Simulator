@@ -9,6 +9,6 @@ sensitivity = 0.2
 target_distance = 4.0
 
 [node name="Pivot" type="SpringArm" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
 [node name="Camera" type="Camera" parent="Pivot"]

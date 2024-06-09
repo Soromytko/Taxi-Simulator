@@ -25,6 +25,7 @@ func _get_next_waypoint():
 
 func _drive(delta : float):
 	mesh_instance.global_transform.origin = _current_waypoint.global_transform.origin
+	mesh_instance.visible = false
 	var target_steering = _calculate_steering()
 	steering = move_toward(steering, target_steering, delta * steer_speed)
 	engine_force = 4

@@ -8,17 +8,17 @@
 [ext_resource path="res://scenes/prefabs/taxi_driver_character.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
-radius = 0.491
-height = 1.8
+radius = 0.246
+height = 0.9
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
 script = ExtResource( 1 )
-radius = 0.491
-height = 1.8
+radius = 0.246
+height = 0.9
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.391, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.696, 0 )
 shape = SubResource( 1 )
 
 [node name="MovementController" type="Spatial" parent="."]
@@ -40,4 +40,4 @@ movement_controller_node_path = NodePath("../..")
 animator_node_path = NodePath("../../../TaxiDriverCharacter")
 
 [node name="TaxiDriverCharacter" parent="." instance=ExtResource( 6 )]
-transform = Transform( -0.82, 0, -1.23817e-07, 0, 0.82, 0, 1.23817e-07, 0, -0.82, 0, 0, 0 )
+transform = Transform( -0.41, 0, -6.19083e-08, 0, 0.41, 0, 6.19083e-08, 0, -0.41, 0, 0, 0 )

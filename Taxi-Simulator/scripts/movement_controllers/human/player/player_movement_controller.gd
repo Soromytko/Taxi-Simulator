@@ -19,7 +19,7 @@ func move(var direction : Vector3, var delta : float = 1):
 
 func move_to_forward(speed : float = 1):
 	var direction := -kinematic_body.global_transform.basis.z
-	move(direction, speed)
+	move(direction, speed / 6)
 
 
 func _rotate_to_direction(direction : Vector3, delta : float = 1):
