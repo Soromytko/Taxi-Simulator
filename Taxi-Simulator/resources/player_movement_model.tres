@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://scripts/human_movement_model.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+max_horizontal_speed = 5.0
+max_vertical_speed = 20.0
+acceleration = 500.0
+deceleration = 500.0
+damping = 5.0
+gravity_force = 9.8
+jump_force = 4.0
+rotation_speed = 3.0

@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scripts/player/player.gd" type="Script" id=1]
+[ext_resource path="res://scripts/state_machine/state_machine.gd" type="Script" id=2]
+[ext_resource path="res://scripts/player/MovementController/player_idle_state.gd" type="Script" id=3]
+[ext_resource path="res://scripts/player/MovementController/player_walk_state.gd" type="Script" id=4]
+[ext_resource path="res://scripts/player/MovementController/player_movement_controller.gd" type="Script" id=5]
+[ext_resource path="res://scenes/prefabs/taxi_driver_character.tscn" type="PackedScene" id=6]
+[ext_resource path="res://resources/player_movement_model.tres" type="Resource" id=7]
+[ext_resource path="res://scripts/player/MovementController/player_fall_state.gd" type="Script" id=8]
+[ext_resource path="res://resources/player_fall_movement_model.tres" type="Resource" id=9]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.491
+height = 1.8
+
+[node name="Player" type="KinematicBody"]
+collision_layer = 2
+script = ExtResource( 1 )
+radius = 0.491
+height = 1.8
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.391, 0 )
+shape = SubResource( 1 )
+
+[node name="MovementController" type="Spatial" parent="."]
+script = ExtResource( 5 )
+kinematic_body_node_path = NodePath("..")
+movement_model_resource = ExtResource( 7 )
+
+[node name="StateMachine" type="Node" parent="MovementController"]
+script = ExtResource( 2 )
+initial_state_node_path = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="MovementController/StateMachine"]
+script = ExtResource( 3 )
+movement_controller_node_path = NodePath("../..")
+animator_node_path = NodePath("../../../TaxiDriverCharacter")
+movement_model_resource = ExtResource( 7 )
+
+[node name="WalkState" type="Node" parent="MovementController/StateMachine"]
+script = ExtResource( 4 )
+movement_controller_node_path = NodePath("../..")
+animator_node_path = NodePath("../../../TaxiDriverCharacter")
+movement_model_resource = ExtResource( 7 )
+
+[node name="FallState" type="Node" parent="MovementController/StateMachine"]
+script = ExtResource( 8 )
+movement_controller_node_path = NodePath("../..")
+animator_node_path = NodePath("../../../TaxiDriverCharacter")
+movement_model_resource = ExtResource( 9 )
+
+[node name="TaxiDriverCharacter" parent="." instance=ExtResource( 6 )]
+transform = Transform( -0.82, 0, -1.23817e-07, 0, 0.82, 0, 1.23817e-07, 0, -0.82, 0, 0, 0 )
