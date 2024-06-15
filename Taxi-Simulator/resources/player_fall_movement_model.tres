@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource( 1 )
-max_horizontal_speed = 5.0
+max_horizontal_speed = 3.5
 max_vertical_speed = 20.0
-acceleration = 10.0
-deceleration = 500.0
-damping = 5.0
+acceleration = 5.0
+deceleration = 2.0
+damping = 2.5
 gravity_force = 9.8
-jump_force = 5.0
+jump_force = 0.0
 rotation_speed = 1.0
