@@ -11,4 +11,4 @@ deceleration = 2.0
 damping = 2.5
 gravity_force = 9.8
 jump_force = 0.0
-rotation_speed = 1.0
+rotation_speed = 2.5

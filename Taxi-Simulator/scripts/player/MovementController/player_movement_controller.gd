@@ -17,8 +17,10 @@ func move_in_direction_and_rotate(direction : Vector3, delta : float):
 func _get_input_axes_relative_to_camera(input_axes : Vector3):
 	var camera : Camera = _get_current_camera()
 	if camera != null:
-		return camera.global_transform.basis.x * input_axes.x + \
+		var result := camera.global_transform.basis.x * input_axes.x + \
 			camera.global_transform.basis.z * input_axes.z
+		result.y = 0
+		return result
 	return input_axes
 
 
