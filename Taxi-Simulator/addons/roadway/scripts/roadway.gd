@@ -3,6 +3,7 @@ extends Spatial
 class_name Roadway
 
 var _waypoints : Array = []
+onready var _is_ready : bool = true
 
 
 func get_nearest_waypoint(point : Vector3) -> Waypoint:
@@ -25,7 +26,8 @@ func _on_child_entered_tree(node : Node):
 	if node is Waypoint:
 		assert(_waypoints.find(node) == -1)
 		_waypoints.append(node)
-		_attach_last()
+		if _is_ready:
+			_attach_last()
 
 
 func _attach_last():
@@ -33,7 +35,8 @@ func _attach_last():
 		return
 	var last_waypoint : Waypoint = _waypoints[_waypoints.size() - 1]
 	var penultimate_waypoint : Waypoint = _waypoints[_waypoints.size() - 2]
-	penultimate_waypoint.next_waypoint_node_path = last_waypoint.get_path()
+	var path : String = "../" + last_waypoint.name
+	penultimate_waypoint.append_next_waypoint_node_path(path)
 
 
 func _on_child_exiting_tree(node : Node):

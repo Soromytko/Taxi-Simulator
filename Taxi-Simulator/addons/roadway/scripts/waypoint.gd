@@ -4,33 +4,49 @@ class_name Waypoint
 
 const class_gizmo_line : Script = preload("./debug/gizmo_line.gd")
 
-export var previous_waypoint_node_path : NodePath setget _set_previous_waypoint_node_path, get_previous_point_node_path
-export var next_waypoint_node_path : NodePath setget _set_next_waypoint_node_path, get_next_point_node_path
+export(Array, NodePath) var prev_waypoint_node_paths : Array setget _set_prev_waypoint_node_paths, _get_prev_waypoint_node_paths
+export(Array, NodePath) var next_waypoint_node_paths : Array setget _set_next_waypoint_node_paths, _get_next_waypoint_node_paths
 
-var previous_waypoint : Spatial
-var next_waypoint : Waypoint
+var prev_waypoints : Array
+var next_waypoints : Array
 
-var _previous_waypoint_node_path : NodePath
-var _next_waypoint_node_path : NodePath
+var _prev_waypoint_node_paths : Array
+var _next_waypoint_node_paths : Array
 var _sphere_mesh_instance : MeshInstance
-var _line : class_gizmo_line
+var _lines : Array
+
+
+func append_next_waypoint_node_path(node_path : NodePath):
+	if next_waypoint_node_paths.find(node_path) != -1:
+		return
+	var maybe_waypoint : Node = get_node_or_null(node_path)
+	if not _is_waypoint(maybe_waypoint):
+		return
+	if next_waypoints.find(maybe_waypoint) == -1:
+		_next_waypoint_node_paths.append(node_path)
+		_set_next_waypoint_node_paths(_next_waypoint_node_paths)
+
+
+func validate_prev_and_next():
+	prev_waypoint_node_paths = _validate_node_paths(prev_waypoint_node_paths)
+	next_waypoint_node_paths = _validate_node_paths(next_waypoint_node_paths)
 
 
 func _enter_tree():
 	_create_child_sphere_shape()
-	_create_line()
+#	_resize_lines()
 
 
-func _exit_tree():
-	_sphere_mesh_instance.queue_free()
-	_line.queue_free()
+#func _exit_tree():
+#	_sphere_mesh_instance.queue_free()
+#	_delete_lines()
 
 
-func _process(delta):
-	if next_waypoint != null && next_waypoint.is_inside_tree():
-		_line.draw(global_transform.origin, next_waypoint.global_transform.origin, Color.green)
-	else:
-		_line.clear()
+func _process(delta : float):
+	for i in next_waypoints.size():
+		var next_waypoint : Waypoint = next_waypoints[i]
+		var line : class_gizmo_line = _lines[i]
+		line.draw(global_transform.origin, next_waypoint.global_transform.origin, Color.green)
 
 
 func _create_child_sphere_shape():
@@ -40,44 +56,77 @@ func _create_child_sphere_shape():
 	_sphere_mesh_instance.scale = Vector3.ONE * 0.1
 
 
-func _create_line():
-	_line = class_gizmo_line.new()
-	add_child(_line)
+func _set_prev_waypoint_node_paths(value : Array):
+	_prev_waypoint_node_paths = _validate_node_paths(value)
+	call_deferred("_on_prev_waypoint_node_paths_changed", value)
 
 
-func _set_previous_waypoint_node_path(value : NodePath):
-	_previous_waypoint_node_path = value
-	call_deferred("_on_previous_waypoint_node_path_changed", value)
+func _get_prev_waypoint_node_paths() -> Array:
+	return _prev_waypoint_node_paths
 
 
-func get_previous_point_node_path():
-	return _previous_waypoint_node_path
+func _set_next_waypoint_node_paths(value : Array):
+	_next_waypoint_node_paths = _validate_node_paths(value)
+	call_deferred("_on_next_waypoint_node_paths_changed", value)
 
 
-func _set_next_waypoint_node_path(value : NodePath):
-	_next_waypoint_node_path = value
-	call_deferred("_on_next_waypoint_node_path_changed", value)
+func _get_next_waypoint_node_paths() -> Array:
+	return _next_waypoint_node_paths
 
 
-func get_next_point_node_path():
-	return _next_waypoint_node_path
+func _on_prev_waypoint_node_paths_changed(value : Array):
+	prev_waypoints.clear()
+	for waypoint_node_path in value:
+		var maybe_waypoint = get_node_or_null(waypoint_node_path)
+		if _is_waypoint(maybe_waypoint):
+			prev_waypoints.append(maybe_waypoint)
+	_resize_lines()
 
 
-func _on_previous_waypoint_node_path_changed(value : NodePath):
-	if value != null:
-		var node = get_node_or_null(value)
-		if node != null:
-			if node.get_script() == get_script():
-				previous_waypoint = node
-				return
-	previous_waypoint = null
+func _on_next_waypoint_node_paths_changed(value : Array):
+	next_waypoints.clear()
+	for waypoint_node_path in value:
+		var maybe_waypoint = get_node_or_null(waypoint_node_path)
+		if _is_waypoint(maybe_waypoint):
+			next_waypoints.append(maybe_waypoint)
+	_resize_lines()
 
 
-func _on_next_waypoint_node_path_changed(value : NodePath):
-	if value != null:
-		var node = get_node_or_null(value)
-		if node != null:
-			if node.get_script() == get_script():
-				next_waypoint = node
-				return
-	next_waypoint = null
+func _resize_lines():
+	if _lines.size() < next_waypoints.size():
+		for i in range(_lines.size(), next_waypoints.size(), 1):
+			var line := class_gizmo_line.new()
+			_lines.append(line)
+			add_child(line)
+	else:
+		for i in range(_lines.size() - 1, next_waypoints.size() - 1, -1):
+			var line : class_gizmo_line = _lines[i]
+			line.clear()
+			line.queue_free()
+			remove_child(line)
+		_lines.resize(next_waypoints.size())
+
+
+func _is_waypoint(maybe_waypoint : Node) -> bool:
+	return maybe_waypoint != null && maybe_waypoint.get_script() == get_script()
+
+
+func _remove_duplicates(array : Array) -> Array:
+	var dict : Dictionary
+	for value in array:
+		dict[value] = value
+	return dict.keys()
+
+
+func _remove_empty_node_paths(node_paths : Array) -> Array:
+	return node_paths
+	var result : Array
+	for node_path in node_paths:
+		if node_path is NodePath && !node_path.is_empty() && get_node_or_null(node_path):
+			result.append(node_path)
+	return result
+
+
+func _validate_node_paths(node_paths : Array) -> Array:
+	return _remove_duplicates(_remove_empty_node_paths(node_paths))
+

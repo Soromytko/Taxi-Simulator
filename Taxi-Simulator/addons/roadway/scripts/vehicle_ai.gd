@@ -1,4 +1,4 @@
-extends "./road_vehicle.gd"
+extends "./path_follower.gd"
 
 export var steer_speed = 1.0
 var mesh_instance : MeshInstance
