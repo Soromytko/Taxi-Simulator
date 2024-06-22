@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://resources/woman.glb" type="PackedScene" id=1]
+[ext_resource path="res://scripts/animator/animator.gd" type="Script" id=2]
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "idle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "walk-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+switch_mode = 1
+advance_condition = "idle_walk"
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+switch_mode = 1
+advance_condition = "walk_idle"
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=6]
+states/idle-loop/node = SubResource( 5 )
+states/idle-loop/position = Vector2( 345, 158 )
+states/walk-loop/node = SubResource( 7 )
+states/walk-loop/position = Vector2( 586, 158 )
+transitions = [ "idle-loop", "walk-loop", SubResource( 8 ), "walk-loop", "idle-loop", SubResource( 9 ) ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=4]
+
+[node name="WomanCharacter" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+animation_tree_node_path = NodePath("AnimationTree")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource( 6 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 4 )
+parameters/conditions/idle_walk = false
+parameters/conditions/walk_idle = false
