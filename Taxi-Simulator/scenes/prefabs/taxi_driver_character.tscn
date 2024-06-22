@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://resources/taxi_driver.glb" type="PackedScene" id=1]
-[ext_resource path="res://scripts/animator.gd" type="Script" id=2]
+[ext_resource path="res://scripts/animator/animator.gd" type="Script" id=2]
 
 [sub_resource type="AnimationNodeAnimation" id=6]
 animation = "falling-loop"
@@ -22,7 +22,7 @@ animation = "running1-loop"
 animation = "standart_walk-loop"
 
 [sub_resource type="AnimationNodeBlendTree" id=5]
-graph_offset = Vector2( 311, 73 )
+graph_offset = Vector2( 29, 70.8559 )
 nodes/Animation/node = SubResource( 6 )
 nodes/Animation/position = Vector2( 607.123, 449.44 )
 nodes/TimeScale/node = SubResource( 8 )
@@ -38,7 +38,7 @@ nodes/run/node = SubResource( 3 )
 nodes/run/position = Vector2( 260, 340 )
 nodes/walk/node = SubResource( 4 )
 nodes/walk/position = Vector2( 60, 220 )
-node_connections = [ "output", 0, "falling", "falling", 0, "idle_walk", "falling", 1, "TimeScale", "idle_walk", 0, "idle", "idle_walk", 1, "run", "TimeScale", 0, "Animation" ]
+node_connections = [ "output", 0, "falling", "falling", 0, "idle_walk", "falling", 1, "TimeScale", "TimeScale", 0, "Animation", "idle_walk", 0, "idle", "idle_walk", 1, "run" ]
 
 [node name="TaxiDriverCharacter" instance=ExtResource( 1 )]
 script = ExtResource( 2 )

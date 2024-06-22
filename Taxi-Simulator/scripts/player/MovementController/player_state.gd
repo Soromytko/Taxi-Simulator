@@ -8,16 +8,15 @@ export(NodePath) var animator_node_path
 export(Resource) var movement_model_resource
 
 onready var movement_controller : class_movement_controller = get_node(movement_controller_node_path) 
-onready var _animator : Animator = get_node(animator_node_path)
 onready var movement_model : HumanMovementModel = movement_model_resource
-
-var _idle_walk_blend_value : float
-var _falling_blend_value : float
+onready var _animator : Animator = get_node(animator_node_path)
+onready var _idle_walk_blend_anim := BlendAnimatorProperty.new(_animator, "idle_walk")
+onready var _falling_blend_anim := BlendAnimatorProperty.new(_animator, "falling")
 
 
 func _on_enter():
-	_idle_walk_blend_value = _animator.get_blend_value("idle_walk")
-	_falling_blend_value = _animator.get_blend_value("falling")
+	_idle_walk_blend_anim.update()
+	_falling_blend_anim.update()
 	movement_controller.movement_model = movement_model
 
 

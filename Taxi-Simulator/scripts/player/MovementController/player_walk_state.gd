@@ -18,10 +18,8 @@ func _on_physics_update(delta : float):
 	_process_jump()
 	_process_movement_on_ground(input, delta)
 	
-	_idle_walk_blend_value = move_toward(_idle_walk_blend_value, 1, delta * 4)
-	_falling_blend_value = move_toward(_falling_blend_value, 0, delta * 7)
-	_animator.set_blend_value("idle_walk", _idle_walk_blend_value)
-	_animator.set_blend_value("falling", _falling_blend_value)
+	_idle_walk_blend_anim.value = move_toward(_idle_walk_blend_anim.value, 1, delta * 4)
+	_falling_blend_anim.value = move_toward(_falling_blend_anim.value, 0, delta * 7)
 
 
 func _on_exit():

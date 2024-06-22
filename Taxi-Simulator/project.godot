@@ -12,7 +12,22 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "Animator",
 "language": "GDScript",
-"path": "res://scripts/animator.gd"
+"path": "res://scripts/animator/animator.gd"
+}, {
+"base": "Reference",
+"class": "AnimatorProperty",
+"language": "GDScript",
+"path": "res://scripts/animator/animator_property.gd"
+}, {
+"base": "AnimatorProperty",
+"class": "BlendAnimatorProperty",
+"language": "GDScript",
+"path": "res://scripts/animator/blend_animator_property.gd"
+}, {
+"base": "AnimatorProperty",
+"class": "BooleanAnimatorProperty",
+"language": "GDScript",
+"path": "res://scripts/animator/boolean_animator_property.gd"
 }, {
 "base": "Node",
 "class": "GameCloser",
@@ -46,6 +61,9 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Animator": "",
+"AnimatorProperty": "",
+"BlendAnimatorProperty": "",
+"BooleanAnimatorProperty": "",
 "GameCloser": "",
 "HumanMovementModel": "",
 "Roadway": "",

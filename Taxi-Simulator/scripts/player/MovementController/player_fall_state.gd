@@ -18,8 +18,7 @@ func _on_physics_update(delta : float):
 #	_process_forward_movement(input, delta / 5)
 #	_movement_controller.fade_horizontal_velocity(delta)
 	
-	_falling_blend_value = move_toward(_falling_blend_value, 1, delta * 7)
-	_animator.set_blend_value("falling", _falling_blend_value)
+	_falling_blend_anim.value = move_toward(_falling_blend_anim.value, 1, delta * 7)
 
 
 func _on_exit():
