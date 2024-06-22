@@ -7,9 +7,8 @@ onready var _animation_tree : AnimationTree = get_node(animation_tree_node_path)
 
 
 func set_blend_value(blend_name : String, value : float):
-	var property := "parameters/%s/blend_amount" % blend_name
+	var property := _get_blend_property(blend_name)
 	_animation_tree.set(property, value)
-#	print(_animation_tree.get(property))
 
 
 func get_blend_value(blend_name : String) -> float:
