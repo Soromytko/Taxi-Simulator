@@ -5,10 +5,6 @@ onready var roadway : Roadway = get_node_or_null(roadway_node_path)
 var current_waypoint : Waypoint
 
 
-func _init_current_waypoint():
-	current_waypoint = roadway.get_nearest_waypoint(global_transform.origin)
-
-
 func _is_reach_current_roadpoint() -> bool:
 	if current_waypoint.global_transform.origin.distance_to(global_transform.origin) < 0.5:
 		return true
