@@ -14,4 +14,4 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="lowpoly_city" parent="." instance=ExtResource( 1 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 55.938, 0, -47.953 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55.938, 0, -47.953 )

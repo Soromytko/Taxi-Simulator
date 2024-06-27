@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/roadway/scripts/roadway.gd" type="Script" id=1]
+[ext_resource path="res://addons/roadway/scripts/waypoint.gd" type="Script" id=2]
+
+[node name="PedestrianRoadway" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Waypoint" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00246, 0, -5.6569 )
+script = ExtResource( 2 )
+next_waypoint_node_paths = [ NodePath("../Waypoint2") ]
+
+[node name="Waypoint2" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.43119, -2.38419e-07, -4.75287 )
+script = ExtResource( 2 )
+prev_waypoint_node_paths = [ NodePath("../Waypoint") ]
+next_waypoint_node_paths = [ NodePath("../Waypoint3") ]
+
+[node name="Waypoint3" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, -2.435 )
+script = ExtResource( 2 )
+prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
+next_waypoint_node_paths = [ NodePath("../Waypoint4") ]
+
+[node name="Waypoint4" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, 0.365361 )
+script = ExtResource( 2 )
+prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
+next_waypoint_node_paths = [ NodePath("../Waypoint10"), NodePath("../Waypoint5") ]
+
+[node name="Waypoint5" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, 5.63785 )
+script = ExtResource( 2 )
+prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
+next_waypoint_node_paths = [ NodePath("../Waypoint6") ]
+
+[node name="Waypoint6" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, 11.5294 )
+script = ExtResource( 2 )
+prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
+next_waypoint_node_paths = [ NodePath("../Waypoint7") ]
+
+[node name="Waypoint10" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.85505, 0.142264, 0.510173 )
+script = ExtResource( 2 )
+
+[node name="Waypoint7" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, 16.4923 )
+script = ExtResource( 2 )
+prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
+next_waypoint_node_paths = [ NodePath("../Waypoint8") ]
+
+[node name="Waypoint8" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, 21.2861 )
+script = ExtResource( 2 )
+prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
+next_waypoint_node_paths = [ NodePath("../Waypoint9") ]
+
+[node name="Waypoint9" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, 26.0197 )
+script = ExtResource( 2 )
+prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
