@@ -2,7 +2,7 @@ tool
 extends Position3D
 class_name Waypoint
 
-const class_gizmo_line : Script = preload("./debug/gizmo_line.gd")
+const CLASS_TWO_POINTS_LINE : Script = preload("./debug/two_points_line.gd")
 
 export(Array, NodePath) var prev_waypoint_node_paths : Array setget _set_prev_waypoint_node_paths, _get_prev_waypoint_node_paths
 export(Array, NodePath) var next_waypoint_node_paths : Array setget _set_next_waypoint_node_paths, _get_next_waypoint_node_paths
@@ -33,20 +33,14 @@ func validate_prev_and_next():
 
 
 func _enter_tree():
-	_create_child_sphere_shape()
-#	_resize_lines()
+	if OS.is_debug_build():
+		_create_child_sphere_shape()
+#	_update_lines()
 
 
 #func _exit_tree():
 #	_sphere_mesh_instance.queue_free()
 #	_delete_lines()
-
-
-func _process(delta : float):
-	for i in next_waypoints.size():
-		var next_waypoint : Waypoint = next_waypoints[i]
-		var line : class_gizmo_line = _lines[i]
-		line.draw(global_transform.origin, next_waypoint.global_transform.origin, Color.green)
 
 
 func _create_child_sphere_shape():
@@ -80,7 +74,7 @@ func _on_prev_waypoint_node_paths_changed(value : Array):
 		var maybe_waypoint = get_node_or_null(waypoint_node_path)
 		if _is_waypoint(maybe_waypoint):
 			prev_waypoints.append(maybe_waypoint)
-	_resize_lines()
+	_update_lines()
 
 
 func _on_next_waypoint_node_paths_changed(value : Array):
@@ -89,22 +83,40 @@ func _on_next_waypoint_node_paths_changed(value : Array):
 		var maybe_waypoint = get_node_or_null(waypoint_node_path)
 		if _is_waypoint(maybe_waypoint):
 			next_waypoints.append(maybe_waypoint)
-	_resize_lines()
+	_update_lines()
 
 
-func _resize_lines():
+func _update_lines():
+	if not OS.is_debug_build():
+		_release_lines()
+		return
 	if _lines.size() < next_waypoints.size():
 		for i in range(_lines.size(), next_waypoints.size(), 1):
-			var line := class_gizmo_line.new()
+			var line := CLASS_TWO_POINTS_LINE.new()
 			_lines.append(line)
 			add_child(line)
 	else:
 		for i in range(_lines.size() - 1, next_waypoints.size() - 1, -1):
-			var line : class_gizmo_line = _lines[i]
+			var line : CLASS_TWO_POINTS_LINE = _lines[i]
 			line.clear()
 			line.queue_free()
 			remove_child(line)
 		_lines.resize(next_waypoints.size())
+	_set_line_points()
+
+
+func _release_lines():
+	for line in _lines:
+		line.queue_free()
+	_lines.clear()
+
+
+func _set_line_points():
+	for i in next_waypoints.size():
+		var next_waypoint : Waypoint = next_waypoints[i]
+		var line : CLASS_TWO_POINTS_LINE = _lines[i]
+		line.start_point = self
+		line.end_point = next_waypoint
 
 
 func _is_waypoint(maybe_waypoint : Node) -> bool:
