@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://polygon_city_pack/buildings/buildings_material.tres" type="Material" id=1]
+[ext_resource path="res://polygon_city_pack/buildings/SM_Bld_Chimney_01.glb" type="PackedScene" id=2]
+
+[node name="SM_Bld_Chimney_01" instance=ExtResource( 2 )]
+
+[node name="lod0" parent="." index="0"]
+material/0 = ExtResource( 1 )
+
+[node name="lod1" parent="." index="1"]
+visible = false
+material/0 = ExtResource( 1 )
+
+[node name="lod2" parent="." index="2"]
+visible = false
+material/0 = ExtResource( 1 )
