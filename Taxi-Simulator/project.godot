@@ -116,7 +116,7 @@ config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/movement_controller/plugin.cfg", "res://addons/roadway/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/movement_controller/plugin.cfg", "res://addons/roadway/plugin.cfg", "res://addons/spline_road/plugin.cfg" )
 
 [gui]
 

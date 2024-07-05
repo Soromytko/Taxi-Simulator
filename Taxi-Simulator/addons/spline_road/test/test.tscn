@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/spline_road/scripts/spline_road.gd" type="Script" id=1]
+
+[sub_resource type="Curve3D" id=1]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 1.52226, 2.05162, -16.7943, -2.24618, -0.359921, -2.28122, 2.24618, 0.359921, 2.28122, 0.985803, 4.20406, -9.22784, -0.46626, 0.782256, -2.21717, 0.46626, -0.782256, 2.21717, 9.53094, 2.62313, -1.63521, 0, 0, 0, 0, 0, 0, 7.79249, 3.02888, 8.31252, 0, 0, 0, 0, 0, 0, 4.63087, -0.817495, 13.5079, 0, 0, 0, 0, 0, 0, 0.348333, -4.1933, 14.541 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
+}
+
+[node name="Spatial" type="Spatial"]
+
+[node name="SplineRoad" type="Path" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31732, -0.292187, -0.012867 )
+curve = SubResource( 1 )
+script = ExtResource( 1 )
+resolution = 10
