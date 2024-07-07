@@ -26,17 +26,6 @@ func _on_child_entered_tree(node : Node):
 	if node is Waypoint:
 		assert(_waypoints.find(node) == -1)
 		_waypoints.append(node)
-		if _is_ready:
-			_attach_last()
-
-
-func _attach_last():
-	if _waypoints.size() < 2:
-		return
-	var last_waypoint : Waypoint = _waypoints[_waypoints.size() - 1]
-	var penultimate_waypoint : Waypoint = _waypoints[_waypoints.size() - 2]
-	var path : String = "../" + last_waypoint.name
-	penultimate_waypoint.append_next_waypoint_node_path(path)
 
 
 func _on_child_exiting_tree(node : Node):

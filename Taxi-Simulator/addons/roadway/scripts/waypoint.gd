@@ -4,32 +4,51 @@ class_name Waypoint
 
 const CLASS_TWO_POINTS_LINE : Script = preload("./debug/two_points_line.gd")
 
-export(Array, NodePath) var prev_waypoint_node_paths : Array setget _set_prev_waypoint_node_paths, _get_prev_waypoint_node_paths
+export var is_created_next_waypoint : bool setget _set_is_created_next_waypoint, _get_is_created_next_waypoint
+export var is_created_prev_waypoint : bool setget _set_is_created_prev_waypoint, _get_is_created_prev_waypoint
 export(Array, NodePath) var next_waypoint_node_paths : Array setget _set_next_waypoint_node_paths, _get_next_waypoint_node_paths
+export(Array, NodePath) var prev_waypoint_node_paths : Array setget _set_prev_waypoint_node_paths, _get_prev_waypoint_node_paths
 
-var prev_waypoints : Array
 var next_waypoints : Array
+var prev_waypoints : Array
 
 var _prev_waypoint_node_paths : Array
 var _next_waypoint_node_paths : Array
 var _sphere_mesh_instance : MeshInstance
 var _lines : Array
 
-
-func append_next_waypoint_node_path(node_path : NodePath):
-	if next_waypoint_node_paths.find(node_path) != -1:
-		return
-	var maybe_waypoint : Node = get_node_or_null(node_path)
-	if not _is_waypoint(maybe_waypoint):
-		return
-	if next_waypoints.find(maybe_waypoint) == -1:
-		_next_waypoint_node_paths.append(node_path)
-		_set_next_waypoint_node_paths(_next_waypoint_node_paths)
+onready var _is_ready : bool = true
 
 
 func validate_prev_and_next():
 	prev_waypoint_node_paths = _validate_node_paths(prev_waypoint_node_paths)
 	next_waypoint_node_paths = _validate_node_paths(next_waypoint_node_paths)
+
+
+func append_next_waypoint_node_path(node_path : NodePath):
+	if _try_append_waypoint_node_path(node_path, _next_waypoint_node_paths, next_waypoints):
+		_commit_next_waypoint_node_paths()
+
+
+func append_prev_waypoint_node_path(node_path : NodePath):
+	if _try_append_waypoint_node_path(node_path, _prev_waypoint_node_paths, prev_waypoints):
+		_commit_prev_waypoint_node_paths()
+
+
+func _try_append_waypoint_node_path(node_path : NodePath, node_paths : Array, waypoints : Array) -> bool:
+	if node_paths.find(node_path) != -1:
+		return false
+	var maybe_waypoint : Node = get_node_or_null(node_path)
+	if !_is_waypoint(maybe_waypoint):
+		return false
+	if waypoints.find(maybe_waypoint) != -1:
+		return false
+	node_paths.append(node_path)
+	return true
+
+
+func get_relative_path() -> String:
+	return "../%s" % name
 
 
 func _enter_tree():
@@ -64,8 +83,61 @@ func _set_next_waypoint_node_paths(value : Array):
 	call_deferred("_on_next_waypoint_node_paths_changed", value)
 
 
+func _commit_next_waypoint_node_paths():
+	_set_next_waypoint_node_paths(_next_waypoint_node_paths)
+
+
+func _commit_prev_waypoint_node_paths():
+	_set_prev_waypoint_node_paths(_prev_waypoint_node_paths)
+
+
 func _get_next_waypoint_node_paths() -> Array:
 	return _next_waypoint_node_paths
+
+
+func _set_is_created_next_waypoint(value : bool):
+	if !_is_ready:
+		return
+	if value && !_get_is_created_next_waypoint():
+		_create_next_waypoint()
+
+
+func _get_is_created_next_waypoint() -> bool:
+	return next_waypoints.size() != 0
+
+
+func _set_is_created_prev_waypoint(value : bool):
+	if !_is_ready:
+		return
+	if value && !_get_is_created_prev_waypoint():
+		_create_prev_waypoint()
+
+
+func _get_is_created_prev_waypoint() -> bool:
+	return prev_waypoints.size() != 0
+
+
+func _create_waypoint(offset : Vector3) -> Waypoint:
+	var waypoint : Waypoint = get_script().new()
+	get_parent().add_child(waypoint)
+	waypoint.global_transform.origin = global_transform.origin + offset
+	waypoint.owner = owner
+	waypoint.name = name
+	return waypoint
+
+
+func _create_next_waypoint():
+	var waypoint := _create_waypoint(global_transform.basis.z)
+	var waypoint_node_path : NodePath = waypoint.get_relative_path()
+	append_next_waypoint_node_path(waypoint_node_path)
+	waypoint.append_prev_waypoint_node_path(get_relative_path())
+
+
+func _create_prev_waypoint():
+	var waypoint := _create_waypoint(-global_transform.basis.z)
+	var waypoint_node_path : NodePath = waypoint.get_relative_path()
+	append_prev_waypoint_node_path(waypoint_node_path)
+	waypoint.append_next_waypoint_node_path(get_relative_path())
 
 
 func _on_prev_waypoint_node_paths_changed(value : Array):
