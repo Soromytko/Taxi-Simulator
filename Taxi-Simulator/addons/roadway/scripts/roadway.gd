@@ -22,6 +22,11 @@ func _enter_tree():
 	_connect_signal("child_exiting_tree")
 
 
+func _exit_tree():
+	_disconnect_signal("child_entered_tree")
+	_disconnect_signal("child_exiting_tree")
+
+
 func _on_child_entered_tree(node : Node):
 	if node is Waypoint:
 		assert(_waypoints.find(node) == -1)
@@ -33,8 +38,6 @@ func _on_child_exiting_tree(node : Node):
 		var index := _waypoints.find(node)
 		assert(index >= 0)
 		_waypoints.remove(index)
-#	_disconnect_signal("child_entered_tree")
-#	_disconnect_signal("child_exiting_tree")
 
 
 func _connect_signal(signal_name : String):
