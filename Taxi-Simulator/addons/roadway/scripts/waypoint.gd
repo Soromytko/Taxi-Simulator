@@ -14,7 +14,6 @@ var prev_waypoints : Array
 
 var _prev_waypoint_node_paths : Array
 var _next_waypoint_node_paths : Array
-var _sphere_mesh_instance : MeshInstance
 var _lines : Array
 
 onready var _is_ready : bool = true
@@ -49,24 +48,6 @@ func _try_append_waypoint_node_path(node_path : NodePath, node_paths : Array, wa
 
 func get_relative_path() -> String:
 	return "../%s" % name
-
-
-func _enter_tree():
-	if OS.is_debug_build():
-		_create_child_sphere_shape()
-#	_update_lines()
-
-
-#func _exit_tree():
-#	_sphere_mesh_instance.queue_free()
-#	_delete_lines()
-
-
-func _create_child_sphere_shape():
-	_sphere_mesh_instance = MeshInstance.new()
-	_sphere_mesh_instance.mesh = SphereMesh.new()
-	add_child(_sphere_mesh_instance)
-	_sphere_mesh_instance.scale = Vector3.ONE * 0.1
 
 
 func _set_prev_waypoint_node_paths(value : Array):
