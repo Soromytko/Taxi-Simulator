@@ -18,8 +18,8 @@ func _is_reach_current_roadpoint() -> bool:
 
 
 func _get_next_waypoint() -> Waypoint:
-	return null if current_waypoint.next_waypoints.size() == 0 \
-		else current_waypoint.next_waypoints[0]
+	return null if current_waypoint.connected_waypoints.size() == 0 \
+		else current_waypoint.connected_waypoints[0]
 
 
 func _get_direction_to_current_waypoint() -> Vector3:

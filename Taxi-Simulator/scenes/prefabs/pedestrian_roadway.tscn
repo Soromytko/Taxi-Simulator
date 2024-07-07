@@ -9,55 +9,44 @@ script = ExtResource( 1 )
 [node name="Waypoint" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00246, 0, -5.6569 )
 script = ExtResource( 2 )
-next_waypoint_node_paths = [ NodePath("../Waypoint2") ]
+connected_waypoint_node_paths = [ NodePath("../Waypoint2"), NodePath("../Waypoint8") ]
 
 [node name="Waypoint2" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.43119, -2.38419e-07, -4.75287 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.63708, 0, -4.71601 )
 script = ExtResource( 2 )
-prev_waypoint_node_paths = [ NodePath("../Waypoint") ]
-next_waypoint_node_paths = [ NodePath("../Waypoint3") ]
+connected_waypoint_node_paths = [ NodePath("../Waypoint"), NodePath("../Waypoint3") ]
 
 [node name="Waypoint3" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, -2.435 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.64979, 0, -2.20867 )
 script = ExtResource( 2 )
-prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
-next_waypoint_node_paths = [ NodePath("../Waypoint4") ]
+connected_waypoint_node_paths = [ NodePath("../Waypoint2"), NodePath("../Waypoint4") ]
 
 [node name="Waypoint4" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, 0.365361 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.63592, 0, 0.554396 )
 script = ExtResource( 2 )
-prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
-next_waypoint_node_paths = [ NodePath("../Waypoint10"), NodePath("../Waypoint5") ]
+connected_waypoint_node_paths = [ NodePath("../Waypoint3"), NodePath("../Waypoint5"), NodePath("../Waypoint9") ]
 
 [node name="Waypoint5" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, 5.63785 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.65317, 0, 5.98979 )
 script = ExtResource( 2 )
-prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
-next_waypoint_node_paths = [ NodePath("../Waypoint6") ]
+connected_waypoint_node_paths = [ NodePath("../Waypoint4"), NodePath("../Waypoint6") ]
 
 [node name="Waypoint6" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, 11.5294 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.65317, 0, 8.99089 )
 script = ExtResource( 2 )
-prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
-next_waypoint_node_paths = [ NodePath("../Waypoint7") ]
-
-[node name="Waypoint10" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.85505, 0.142264, 0.510173 )
-script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint5"), NodePath("../Waypoint7") ]
 
 [node name="Waypoint7" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, 16.4923 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.65317, 0, 11.483 )
 script = ExtResource( 2 )
-prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
-next_waypoint_node_paths = [ NodePath("../Waypoint8") ]
+connected_waypoint_node_paths = [ NodePath("../Waypoint6") ]
 
 [node name="Waypoint8" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, 21.2861 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71759, 0, -5.76457 )
 script = ExtResource( 2 )
-prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
-next_waypoint_node_paths = [ NodePath("../Waypoint9") ]
+connected_waypoint_node_paths = [ NodePath("../Waypoint") ]
 
 [node name="Waypoint9" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.626, 0, 26.0197 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96595, 0.352397, 0.513247 )
 script = ExtResource( 2 )
-prev_waypoint_node_paths = [ NodePath("../Waypoint2") ]
+connected_waypoint_node_paths = [ NodePath("../Waypoint4") ]

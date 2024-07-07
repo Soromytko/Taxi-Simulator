@@ -5,35 +5,25 @@ class_name Waypoint
 const CLASS_TWO_POINTS_LINE : Script = preload("./debug/two_points_line.gd")
 
 #Hack to create a button in the inspector
-export var add_next_waypoint : bool setget _add_next_waypoint
-export var add_prev_waypoint : bool setget _add_prev_waypoint
+export var add_waypoint : bool setget _add_waypoint
 
-export(Array, NodePath) var next_waypoint_node_paths : Array setget _set_next_waypoint_node_paths, _get_next_waypoint_node_paths
-export(Array, NodePath) var prev_waypoint_node_paths : Array setget _set_prev_waypoint_node_paths, _get_prev_waypoint_node_paths
+export(Array, NodePath) var connected_waypoint_node_paths : Array setget _set_connected_waypoint_node_paths, _get_connected_waypoint_node_paths
 
-var next_waypoints : Array
-var prev_waypoints : Array
+var connected_waypoints : Array
 
-var _prev_waypoint_node_paths : Array
-var _next_waypoint_node_paths : Array
+var _connected_waypoint_node_paths : Array
 var _lines : Array
 
 onready var _is_ready : bool = true
 
 
 func validate_prev_and_next():
-	prev_waypoint_node_paths = _validate_node_paths(prev_waypoint_node_paths)
-	next_waypoint_node_paths = _validate_node_paths(next_waypoint_node_paths)
+	connected_waypoint_node_paths = _validate_node_paths(connected_waypoint_node_paths)
 
 
-func append_next_waypoint_node_path(node_path : NodePath):
-	if _try_append_waypoint_node_path(node_path, _next_waypoint_node_paths, next_waypoints):
-		_commit_next_waypoint_node_paths()
-
-
-func append_prev_waypoint_node_path(node_path : NodePath):
-	if _try_append_waypoint_node_path(node_path, _prev_waypoint_node_paths, prev_waypoints):
-		_commit_prev_waypoint_node_paths()
+func append_waypoint_node_path(node_path : NodePath):
+	if _try_append_waypoint_node_path(node_path, _connected_waypoint_node_paths, connected_waypoints):
+		_commit_connected_waypoint_node_paths()
 
 
 func _try_append_waypoint_node_path(node_path : NodePath, node_paths : Array, waypoints : Array) -> bool:
@@ -52,44 +42,24 @@ func get_relative_path() -> String:
 	return "../%s" % name
 
 
-func _set_prev_waypoint_node_paths(value : Array):
-	_prev_waypoint_node_paths = _validate_node_paths(value)
-	call_deferred("_on_prev_waypoint_node_paths_changed", value)
+func _set_connected_waypoint_node_paths(value : Array):
+	_connected_waypoint_node_paths = _validate_node_paths(value)
+	call_deferred("_on_connected_waypoint_node_paths_changed", value)
 
 
-func _get_prev_waypoint_node_paths() -> Array:
-	return _prev_waypoint_node_paths
+func _get_connected_waypoint_node_paths() -> Array:
+	return _connected_waypoint_node_paths
 
 
-func _set_next_waypoint_node_paths(value : Array):
-	_next_waypoint_node_paths = _validate_node_paths(value)
-	call_deferred("_on_next_waypoint_node_paths_changed", value)
+func _commit_connected_waypoint_node_paths():
+	_set_connected_waypoint_node_paths(_connected_waypoint_node_paths)
 
 
-func _commit_next_waypoint_node_paths():
-	_set_next_waypoint_node_paths(_next_waypoint_node_paths)
-
-
-func _commit_prev_waypoint_node_paths():
-	_set_prev_waypoint_node_paths(_prev_waypoint_node_paths)
-
-
-func _get_next_waypoint_node_paths() -> Array:
-	return _next_waypoint_node_paths
-
-
-func _add_next_waypoint(value : bool):
+func _add_waypoint(value : bool):
 	if !_is_ready:
 		return
 	if value:
-		_create_next_waypoint()
-
-
-func _add_prev_waypoint(value : bool):
-	if !_is_ready:
-		return
-	if value:
-		_create_prev_waypoint()
+		_create_and_connect_waypoint()
 
 
 func _create_waypoint(offset : Vector3) -> Waypoint:
@@ -101,35 +71,34 @@ func _create_waypoint(offset : Vector3) -> Waypoint:
 	return waypoint
 
 
-func _create_next_waypoint():
-	var waypoint := _create_waypoint(global_transform.basis.z)
+func _connect_waypoint(waypoint : Waypoint):
 	var waypoint_node_path : NodePath = waypoint.get_relative_path()
-	append_next_waypoint_node_path(waypoint_node_path)
-	waypoint.append_prev_waypoint_node_path(get_relative_path())
+	append_waypoint_node_path(waypoint_node_path)
+	waypoint.append_waypoint_node_path(get_relative_path())
 
 
-func _create_prev_waypoint():
-	var waypoint := _create_waypoint(-global_transform.basis.z)
-	var waypoint_node_path : NodePath = waypoint.get_relative_path()
-	append_prev_waypoint_node_path(waypoint_node_path)
-	waypoint.append_next_waypoint_node_path(get_relative_path())
+func _create_and_connect_waypoint():
+#	var waypoint := _create_waypoint(global_transform.basis.z)
+	var waypoint := _create_waypoint(_get_offset_for_new_waypoint())
+	_connect_waypoint(waypoint)
 
 
-func _on_prev_waypoint_node_paths_changed(value : Array):
-	prev_waypoints.clear()
+func _get_offset_for_new_waypoint() -> Vector3:
+	var count : int = 0
+	var distance : Vector3
+	for waypoint in connected_waypoints:
+		if waypoint != self:
+			distance += global_transform.origin - waypoint.global_transform.origin
+			count += 1
+	return distance / max(1, count) if distance != Vector3.ZERO else global_transform.basis.z
+
+
+func _on_connected_waypoint_node_paths_changed(value : Array):
+	connected_waypoints.clear()
 	for waypoint_node_path in value:
 		var maybe_waypoint = get_node_or_null(waypoint_node_path)
 		if _is_waypoint(maybe_waypoint):
-			prev_waypoints.append(maybe_waypoint)
-	_update_lines()
-
-
-func _on_next_waypoint_node_paths_changed(value : Array):
-	next_waypoints.clear()
-	for waypoint_node_path in value:
-		var maybe_waypoint = get_node_or_null(waypoint_node_path)
-		if _is_waypoint(maybe_waypoint):
-			next_waypoints.append(maybe_waypoint)
+			connected_waypoints.append(maybe_waypoint)
 	_update_lines()
 
 
@@ -137,18 +106,18 @@ func _update_lines():
 	if not OS.is_debug_build():
 		_release_lines()
 		return
-	if _lines.size() < next_waypoints.size():
-		for i in range(_lines.size(), next_waypoints.size(), 1):
+	if _lines.size() < connected_waypoints.size():
+		for i in range(_lines.size(), connected_waypoints.size(), 1):
 			var line := CLASS_TWO_POINTS_LINE.new()
 			_lines.append(line)
 			add_child(line)
 	else:
-		for i in range(_lines.size() - 1, next_waypoints.size() - 1, -1):
+		for i in range(_lines.size() - 1, connected_waypoints.size() - 1, -1):
 			var line : CLASS_TWO_POINTS_LINE = _lines[i]
 			line.clear()
 			line.queue_free()
 			remove_child(line)
-		_lines.resize(next_waypoints.size())
+		_lines.resize(connected_waypoints.size())
 	_set_line_points()
 
 
@@ -159,8 +128,8 @@ func _release_lines():
 
 
 func _set_line_points():
-	for i in next_waypoints.size():
-		var next_waypoint : Waypoint = next_waypoints[i]
+	for i in connected_waypoints.size():
+		var next_waypoint : Waypoint = connected_waypoints[i]
 		var line : CLASS_TWO_POINTS_LINE = _lines[i]
 		line.start_point = self
 		line.end_point = next_waypoint
