@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/road_maker/scripts/road.gd" type="Script" id=1]
+
+[sub_resource type="Curve3D" id=1]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 1.52226, 2.05162, -16.7943, 0, 0, 0, 0, 0, 0, 0.303965, 5.98442, -7.66472, 0, 0, 0, 0, 0, 0, -4.06771, 6.77826, -1.35702, 0, 0, 0, 0, 0, 0, -10.1989, 5.651, 2.74975 ),
+"tilts": PoolRealArray( 0, 0, 0, 0 )
+}
+
+[sub_resource type="PrismMesh" id=2]
+
+[sub_resource type="CylinderMesh" id=3]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Road" type="Path" parent="."]
+curve = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="PathFollow2" type="PathFollow" parent="Road"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.999997, 1.52226, 2.05162, -16.7943 )
+rotation_mode = 1
+
+[node name="MeshInstance" type="MeshInstance" parent="Road/PathFollow2"]
+mesh = SubResource( 2 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Road/PathFollow2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.848 )
+mesh = SubResource( 3 )
