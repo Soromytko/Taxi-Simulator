@@ -4,8 +4,10 @@ class_name Waypoint
 
 const CLASS_TWO_POINTS_LINE : Script = preload("./debug/two_points_line.gd")
 
-export var is_created_next_waypoint : bool setget _set_is_created_next_waypoint, _get_is_created_next_waypoint
-export var is_created_prev_waypoint : bool setget _set_is_created_prev_waypoint, _get_is_created_prev_waypoint
+#Hack to create a button in the inspector
+export var add_next_waypoint : bool setget _add_next_waypoint
+export var add_prev_waypoint : bool setget _add_prev_waypoint
+
 export(Array, NodePath) var next_waypoint_node_paths : Array setget _set_next_waypoint_node_paths, _get_next_waypoint_node_paths
 export(Array, NodePath) var prev_waypoint_node_paths : Array setget _set_prev_waypoint_node_paths, _get_prev_waypoint_node_paths
 
@@ -76,26 +78,18 @@ func _get_next_waypoint_node_paths() -> Array:
 	return _next_waypoint_node_paths
 
 
-func _set_is_created_next_waypoint(value : bool):
+func _add_next_waypoint(value : bool):
 	if !_is_ready:
 		return
-	if value && !_get_is_created_next_waypoint():
+	if value:
 		_create_next_waypoint()
 
 
-func _get_is_created_next_waypoint() -> bool:
-	return next_waypoints.size() != 0
-
-
-func _set_is_created_prev_waypoint(value : bool):
+func _add_prev_waypoint(value : bool):
 	if !_is_ready:
 		return
-	if value && !_get_is_created_prev_waypoint():
+	if value:
 		_create_prev_waypoint()
-
-
-func _get_is_created_prev_waypoint() -> bool:
-	return prev_waypoints.size() != 0
 
 
 func _create_waypoint(offset : Vector3) -> Waypoint:
