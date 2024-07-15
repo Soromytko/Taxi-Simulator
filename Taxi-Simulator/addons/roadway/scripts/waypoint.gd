@@ -2,10 +2,18 @@ tool
 extends Position3D
 class_name Waypoint
 
+enum WaypointJoinType {
+	Back,
+	Forward,
+	ForwardBack,
+}
+
 const CLASS_TWO_POINTS_LINE : Script = preload("./debug/two_points_line.gd")
 
 #Hack to create a button in the inspector
-export var add_waypoint : bool setget _add_waypoint
+export var add_forward_joined_waypoint : bool setget _add_forward_joined_waypoint_clicked
+export var add_forwardback_joined_waypoint : bool setget _add_forwardback_joined_waypoint_clicked
+export var add_back_joined_waypoint : bool setget _add_back_joined_waypoint_clicked
 
 export(Array, NodePath) var connected_waypoint_node_paths : Array setget _set_connected_waypoint_node_paths, _get_connected_waypoint_node_paths
 
@@ -55,11 +63,21 @@ func _commit_connected_waypoint_node_paths():
 	_set_connected_waypoint_node_paths(_connected_waypoint_node_paths)
 
 
-func _add_waypoint(value : bool):
-	if !_is_ready:
-		return
-	if value:
-		_create_and_connect_waypoint()
+func _add_forward_joined_waypoint_clicked(is_click : bool):
+	_click_add_waypoint(is_click, WaypointJoinType.Forward)
+
+
+func _add_back_joined_waypoint_clicked(is_click : bool):
+	_click_add_waypoint(is_click, WaypointJoinType.Back)
+
+
+func _add_forwardback_joined_waypoint_clicked(is_click : bool):
+	_click_add_waypoint(is_click, WaypointJoinType.ForwardBack)
+
+
+func _click_add_waypoint(is_click : bool, joinType : int):
+	if _is_ready && is_click:
+		_create_and_connect_waypoint(joinType)
 
 
 func _create_waypoint(offset : Vector3) -> Waypoint:
@@ -71,16 +89,17 @@ func _create_waypoint(offset : Vector3) -> Waypoint:
 	return waypoint
 
 
-func _connect_waypoint(waypoint : Waypoint):
+func _connect_waypoint(waypoint : Waypoint, joinType : int):
 	var waypoint_node_path : NodePath = waypoint.get_relative_path()
-	append_waypoint_node_path(waypoint_node_path)
-	waypoint.append_waypoint_node_path(get_relative_path())
+	if joinType == WaypointJoinType.Forward || joinType == WaypointJoinType.ForwardBack:
+		append_waypoint_node_path(waypoint_node_path)
+	if joinType == WaypointJoinType.Back || joinType == WaypointJoinType.ForwardBack:
+		waypoint.append_waypoint_node_path(get_relative_path())
 
 
-func _create_and_connect_waypoint():
-#	var waypoint := _create_waypoint(global_transform.basis.z)
+func _create_and_connect_waypoint(joinType : int = WaypointJoinType.ForwardBack):
 	var waypoint := _create_waypoint(_get_offset_for_new_waypoint())
-	_connect_waypoint(waypoint)
+	_connect_waypoint(waypoint, joinType)
 
 
 func _get_offset_for_new_waypoint() -> Vector3:
