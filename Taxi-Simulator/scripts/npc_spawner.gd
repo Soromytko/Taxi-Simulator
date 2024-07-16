@@ -23,8 +23,8 @@ func _ready():
 			Vector3(rng.randf_range(-2, 2), 0, rng.randf_range(-2, 2))
 
 
-func _spawn_npc(index : int, position : Vector3) -> NPC:
-	var npc : NPC = _npc_packed_scenes[index].instance()
+func _spawn_npc(index : int, position : Vector3) -> PhysicsBody:
+	var npc : PhysicsBody = _npc_packed_scenes[index].instance()
 	call_deferred("_init_npc", npc, position)
 	return npc
 
