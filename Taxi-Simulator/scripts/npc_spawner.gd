@@ -25,9 +25,13 @@ func _ready():
 
 func _spawn_npc(index : int, position : Vector3) -> NPC:
 	var npc : NPC = _npc_packed_scenes[index].instance()
-	get_tree().root.call_deferred("add_child", npc)
-	npc.global_transform.origin = position
+	call_deferred("_init_npc", npc, position)
 	return npc
+
+
+func _init_npc(npc, position : Vector3):
+	add_child(npc)
+	npc.global_transform.origin = position
 
 
 func _get_rand_index(rng : TimedRNG) -> int:
