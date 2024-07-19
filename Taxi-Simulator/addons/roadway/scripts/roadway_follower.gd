@@ -40,11 +40,3 @@ func _get_angle_beween_waypoint(waypoint : Waypoint) -> float:
 	var angle : float = right_direction.angle_to(direction_to_waypoint)
 	return -angle + PI / 2
 
-
-func _calculate_steering() -> float:
-	var direction_tocurrent_waypoint := _get_direction_to_current_waypoint()
-	var right_direction := global_transform.basis.x
-	var angle : float = right_direction.angle_to(direction_tocurrent_waypoint)
-	return -angle + PI / 2
-
-

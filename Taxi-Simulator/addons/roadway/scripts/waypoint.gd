@@ -46,6 +46,16 @@ func _try_append_waypoint_node_path(node_path : NodePath, node_paths : Array, wa
 	return true
 
 
+func get_average_offset() -> Vector3:
+	var count : int = 0
+	var distance : Vector3
+	for waypoint in connected_waypoints:
+		if waypoint != self:
+			distance += waypoint.global_transform.origin - global_transform.origin
+			count += 1
+	return distance / max(1, count) if distance != Vector3.ZERO else global_transform.basis.z
+
+
 func get_relative_path() -> String:
 	return "../%s" % name
 
@@ -98,18 +108,8 @@ func _connect_waypoint(waypoint : Waypoint, joinType : int):
 
 
 func _create_and_connect_waypoint(joinType : int = WaypointJoinType.ForwardBack):
-	var waypoint := _create_waypoint(_get_offset_for_new_waypoint())
+	var waypoint := _create_waypoint(-get_average_offset())
 	_connect_waypoint(waypoint, joinType)
-
-
-func _get_offset_for_new_waypoint() -> Vector3:
-	var count : int = 0
-	var distance : Vector3
-	for waypoint in connected_waypoints:
-		if waypoint != self:
-			distance += global_transform.origin - waypoint.global_transform.origin
-			count += 1
-	return distance / max(1, count) if distance != Vector3.ZERO else global_transform.basis.z
 
 
 func _on_connected_waypoint_node_paths_changed(value : Array):

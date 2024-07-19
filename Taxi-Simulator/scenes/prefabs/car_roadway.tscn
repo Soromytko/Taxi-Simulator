@@ -1,0 +1,612 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/roadway/scripts/roadway.gd" type="Script" id=1]
+[ext_resource path="res://addons/roadway/scripts/waypoint.gd" type="Script" id=2]
+
+[node name="CarRoadway" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Waypoint" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.39503, 0, -7.99609 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint2") ]
+
+[node name="Waypoint2" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.19171, 0, -8.12052 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint3") ]
+
+[node name="Waypoint3" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.72744, 0, -8.24496 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint4"), NodePath("../Waypoint121") ]
+
+[node name="Waypoint4" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.08134, 0, -6.83673 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint5") ]
+
+[node name="Waypoint5" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2037, 0, -3.73452 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint6") ]
+
+[node name="Waypoint6" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1824, 0, 3.29026 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint7") ]
+
+[node name="Waypoint7" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1612, 0, 11.677 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint8") ]
+
+[node name="Waypoint8" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1399, 0, 20.0638 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint9") ]
+
+[node name="Waypoint9" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1186, 0, 30.559 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint10") ]
+
+[node name="Waypoint10" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3226, 0, 41.0542 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint11") ]
+
+[node name="Waypoint11" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3326, 0, 51.3804 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint12") ]
+
+[node name="Waypoint12" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.22247, 0, 54.3382 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint13") ]
+
+[node name="Waypoint13" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6004, 0, 56.4355 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint14") ]
+
+[node name="Waypoint14" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42615, 0, 56.5001 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint15") ]
+
+[node name="Waypoint15" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7481, 0, 56.5647 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint16") ]
+
+[node name="Waypoint16" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5173, 0, 56.4745 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint17") ]
+
+[node name="Waypoint17" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.2865, 0, 56.3843 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint18") ]
+
+[node name="Waypoint18" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0557, 0, 56.2942 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint19") ]
+
+[node name="Waypoint19" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38.8249, 0, 56.204 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint20") ]
+
+[node name="Waypoint20" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -47.5941, 0, 56.1138 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint21") ]
+
+[node name="Waypoint21" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -59.1467, 0, 56.0237 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint22") ]
+
+[node name="Waypoint22" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -66.8266, 0, 56.0783 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint23") ]
+
+[node name="Waypoint23" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -69.0292, 0, 55.1109 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint24") ]
+
+[node name="Waypoint24" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -71.5701, 0, 57.4287 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint25") ]
+
+[node name="Waypoint25" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -69.8649, 0, 60.3251 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint26") ]
+
+[node name="Waypoint26" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60.6689, 0, 60.2835 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint27") ]
+
+[node name="Waypoint27" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -45.7973, 0, 60.2418 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint28") ]
+
+[node name="Waypoint28" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30.9257, 0, 60.2002 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint29") ]
+
+[node name="Waypoint29" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.054, 0, 60.1586 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint30") ]
+
+[node name="Waypoint30" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18242, 0, 60.117 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint31") ]
+
+[node name="Waypoint31" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.69424, 0, 60.0808 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint32") ]
+
+[node name="Waypoint32" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4219, 0, 56.7335 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint33") ]
+
+[node name="Waypoint33" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9758, 0, 51.455 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint34") ]
+
+[node name="Waypoint34" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.909, 0, 43.7218 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint35") ]
+
+[node name="Waypoint35" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8421, 0, 33.9592 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint36") ]
+
+[node name="Waypoint36" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7752, 0, 24.1967 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint37") ]
+
+[node name="Waypoint37" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7021, 0, 12.3931 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint38") ]
+
+[node name="Waypoint38" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6415, 0, 0.627224 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint39") ]
+
+[node name="Waypoint39" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5809, 0, -7.05512 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint40") ]
+
+[node name="Waypoint40" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.762, 0, -10.1029 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint41"), NodePath("../Waypoint43") ]
+
+[node name="Waypoint41" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7906, 0, -13.3854 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint42") ]
+
+[node name="Waypoint42" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7875, 0, -18.7254 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint41"), NodePath("../Waypoint45") ]
+
+[node name="Waypoint43" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.04359, 0, -11.988 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint44") ]
+
+[node name="Waypoint44" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.56688, 0, -12.0971 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint51") ]
+
+[node name="Waypoint45" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1537, 0, -19.6369 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint46") ]
+
+[node name="Waypoint46" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8219, 0, -22.0854 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint45"), NodePath("../Waypoint47") ]
+
+[node name="Waypoint47" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5526, 0, -22.0554 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint48") ]
+
+[node name="Waypoint48" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.18559, 0, -18.6169 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint49") ]
+
+[node name="Waypoint49" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.86835, 0, -15.9198 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint48"), NodePath("../Waypoint50") ]
+
+[node name="Waypoint50" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.16339, 0, -13.41 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint44") ]
+
+[node name="Waypoint51" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.31127, 0, -12.2062 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint52") ]
+
+[node name="Waypoint52" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.78561, 0, -12.0386 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint53") ]
+
+[node name="Waypoint53" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6807, 0, -12.132 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint54"), NodePath("../Waypoint63") ]
+
+[node name="Waypoint54" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4352, 0, -12.7 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint55") ]
+
+[node name="Waypoint55" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7935, 0, -15.4987 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint56") ]
+
+[node name="Waypoint56" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8723, 0, -19.601 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint57") ]
+
+[node name="Waypoint57" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.9249, 0, -21.4502 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint58") ]
+
+[node name="Waypoint58" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.8295, 0, -22.0256 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint59") ]
+
+[node name="Waypoint59" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3285, 0, -20.9216 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint60") ]
+
+[node name="Waypoint60" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.9587, -4.76837e-07, -19.3732 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint61") ]
+
+[node name="Waypoint61" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.9587, -4.76837e-07, -16.379 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint62"), NodePath("../Waypoint65"), NodePath("../Waypoint68") ]
+
+[node name="Waypoint62" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5287, -4.76837e-07, -13.4936 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint63") ]
+
+[node name="Waypoint63" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.6521, -4.76837e-07, -11.7255 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint64") ]
+
+[node name="Waypoint64" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.6393, -4.76837e-07, -11.7326 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint86") ]
+
+[node name="Waypoint65" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1149, -4.76837e-07, -10.2708 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint66") ]
+
+[node name="Waypoint66" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1149, -4.76837e-07, -4.6984 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint67") ]
+
+[node name="Waypoint67" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1149, -4.76837e-07, 0.157792 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint72") ]
+
+[node name="Waypoint68" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.7338, -4.76837e-07, -11.748 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint69") ]
+
+[node name="Waypoint69" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4322, -4.76837e-07, -8.95091 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint70") ]
+
+[node name="Waypoint70" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.7393, -4.76837e-07, -7.95091 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint71") ]
+
+[node name="Waypoint71" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.50331, -4.76837e-07, -7.85727 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint") ]
+
+[node name="Waypoint72" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1149, -4.76837e-07, 6.56368 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint73") ]
+
+[node name="Waypoint73" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1149, -4.76837e-07, 16.6963 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint74") ]
+
+[node name="Waypoint74" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1149, -4.76837e-07, 23.3104 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint75") ]
+
+[node name="Waypoint75" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.6159, -9.53674e-07, 27.4861 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint76") ]
+
+[node name="Waypoint76" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.347, -9.53674e-07, 29.5891 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint77") ]
+
+[node name="Waypoint77" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6864, -9.53674e-07, 29.6472 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint102") ]
+
+[node name="Waypoint78" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8888, -4.76837e-07, -6.58499 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint70") ]
+
+[node name="Waypoint79" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4222, -4.76837e-07, -4.18853 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint78"), NodePath("../Waypoint84"), NodePath("../Waypoint55") ]
+
+[node name="Waypoint80" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2295, -4.76837e-07, -0.772677 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint79") ]
+
+[node name="Waypoint81" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.9597, -4.76837e-07, 4.52245 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint80") ]
+
+[node name="Waypoint82" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8427, -4.76837e-07, 11.551 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint81") ]
+
+[node name="Waypoint83" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7257, -4.76837e-07, 18.5796 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint82") ]
+
+[node name="Waypoint84" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.0213, -4.76837e-07, -8.959 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint85") ]
+
+[node name="Waypoint85" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5615, -7.15256e-07, -11.6538 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint63") ]
+
+[node name="Waypoint86" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33.3234, -4.76837e-07, -11.8856 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint87") ]
+
+[node name="Waypoint87" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -46.5771, -4.76837e-07, -11.9918 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint88") ]
+
+[node name="Waypoint88" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -53.7293, -4.76837e-07, -12.0102 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint89") ]
+
+[node name="Waypoint89" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -57.669, -4.76837e-07, -10.7238 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint90") ]
+
+[node name="Waypoint90" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60.6407, 1.7053e-13, -6.97909 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint91") ]
+
+[node name="Waypoint91" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -61.6299, 1.7053e-13, 0.0563455 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint92") ]
+
+[node name="Waypoint92" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -61.63, 0, 8.533 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint93") ]
+
+[node name="Waypoint93" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -61.63, 0, 17.6413 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint94") ]
+
+[node name="Waypoint94" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -61.63, 0, 26.6933 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint95") ]
+
+[node name="Waypoint95" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -58.5415, 0, 31.6211 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint96") ]
+
+[node name="Waypoint96" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -52.6312, 0, 33.6575 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint97") ]
+
+[node name="Waypoint97" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44.1385, 0, 33.613 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint98") ]
+
+[node name="Waypoint98" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -32.2663, 0, 33.5391 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint99") ]
+
+[node name="Waypoint99" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.666, 0, 33.2919 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint100") ]
+
+[node name="Waypoint100" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.2314, 0, 31.2287 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint101") ]
+
+[node name="Waypoint101" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2356, 0, 26.3164 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint83") ]
+
+[node name="Waypoint102" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35.4532, -4.76837e-07, 29.2946 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint103") ]
+
+[node name="Waypoint103" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -45.0809, -4.76837e-07, 29.3832 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint104") ]
+
+[node name="Waypoint104" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -52.1497, -4.76837e-07, 29.3557 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint105") ]
+
+[node name="Waypoint105" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -55.353, -4.76837e-07, 28.9317 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint106") ]
+
+[node name="Waypoint106" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -57.1858, -4.76837e-07, 27.3558 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint107") ]
+
+[node name="Waypoint107" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -57.4387, -4.76837e-07, 22.069 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint108") ]
+
+[node name="Waypoint108" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -57.4387, -4.76837e-07, 14.4534 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint109") ]
+
+[node name="Waypoint109" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -57.4387, -4.76837e-07, 5.90303 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint110") ]
+
+[node name="Waypoint110" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -57.4387, -4.76837e-07, -3.35025 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint111") ]
+
+[node name="Waypoint111" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -56.6579, -4.76837e-07, -5.97466 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint112") ]
+
+[node name="Waypoint112" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -54.1911, -4.76837e-07, -7.5849 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint113") ]
+
+[node name="Waypoint113" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -48.6119, -4.76837e-07, -7.9976 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint114") ]
+
+[node name="Waypoint114" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.3899, 4.76837e-07, -7.90361 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint115") ]
+
+[node name="Waypoint115" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.948, 4.76837e-07, -8.14335 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint116") ]
+
+[node name="Waypoint116" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.1427, 4.76837e-07, -7.9342 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint117"), NodePath("../Waypoint120"), NodePath("../Waypoint70") ]
+
+[node name="Waypoint117" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.9641, 4.76837e-07, -8.53082 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint118") ]
+
+[node name="Waypoint118" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3319, 4.76837e-07, -9.51838 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint119") ]
+
+[node name="Waypoint119" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4092, 4.76837e-07, -12.4768 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint55") ]
+
+[node name="Waypoint120" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3068, 4.76837e-07, -7.25441 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint66") ]
+
+[node name="Waypoint121" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.976, -4.76837e-07, -8.87804 )
+script = ExtResource( 2 )
+connected_waypoint_node_paths = [ NodePath("../Waypoint40") ]
