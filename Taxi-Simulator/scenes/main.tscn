@@ -1,14 +1,15 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://city_prototype/lowpoly_city.glb" type="PackedScene" id=1]
 [ext_resource path="res://scripts/game_closer.gd" type="Script" id=2]
 [ext_resource path="res://scenes/prefabs/women_npc.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/prefabs/pedestrian_roadway.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/prefabs/car_roadway.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/prefabs/player_and_camera.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/prefabs/player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/npc_spawner.gd" type="Script" id=7]
 [ext_resource path="res://scripts/npcs/car_npc/car_npc_spawner.gd" type="Script" id=8]
 [ext_resource path="res://scenes/car_npc.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/prefabs/third_person_camera.tscn" type="PackedScene" id=10]
 
 [sub_resource type="HeightMapShape" id=1]
 map_width = 100
@@ -29,8 +30,13 @@ map_data = PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.1323, 7.62939e-06, 23.7726 )
 shape = SubResource( 1 )
 
-[node name="PlayerAndCamera" parent="." instance=ExtResource( 6 )]
+[node name="Player" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1713, 7.15256e-06, -8.64666 )
+
+[node name="ThirdPersonCamera" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1713, -0.621336, -7.20989 )
+target_node_path = NodePath("../Player")
+target_distance = 2.0
 
 [node name="GameCloser" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -40,13 +46,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1762, 7.62939e-06, -5.32382 
 
 [node name="PedestrianNPCSpawner" type="Spatial" parent="."]
 script = ExtResource( 7 )
-_observer_node_path = NodePath("../PlayerAndCamera")
+_observer_node_path = NodePath("../ThirdPersonCamera")
 _roadway_node_path = NodePath("../PedestrianRoadway")
 _npc_packed_scenes = [ ExtResource( 3 ) ]
 
 [node name="CarNPCSpawner" type="Spatial" parent="."]
 script = ExtResource( 8 )
-_observer_node_path = NodePath("../PlayerAndCamera")
+_observer_node_path = NodePath("../ThirdPersonCamera")
 _roadway_node_path = NodePath("../CarRoadway")
 _max_distance = 1000.0
 _instance_count = 10
