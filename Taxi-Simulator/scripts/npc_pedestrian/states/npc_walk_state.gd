@@ -1,10 +1,11 @@
-extends "./npc_state.gd"
+extends "./npc_movement_state.gd"
 
 onready var _walk_anim_bool := BooleanAnimatorProperty.new(_animator, "idle_walk")
 
 
 func _on_enter():
 	_walk_anim_bool.value = true
+	_init_roadway_follower()
 
 
 func _on_physics_update(delta : float):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/npc_pedestrian/npc.gd" type="Script" id=1]
 [ext_resource path="res://scenes/prefabs/woman_character.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scripts/state_machine/state_machine.gd" type="Script" id=6]
 [ext_resource path="res://scripts/npc_pedestrian/states/npc_idle_state.gd" type="Script" id=7]
 [ext_resource path="res://scripts/npc_pedestrian/states/npc_walk_state.gd" type="Script" id=8]
+[ext_resource path="res://scripts/npc_pedestrian/states/npc_drive_state.gd" type="Script" id=9]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.301
@@ -27,7 +28,6 @@ movement_model_resource = ExtResource( 3 )
 
 [node name="RoadwayFollower" type="Spatial" parent="."]
 script = ExtResource( 4 )
-_roadway_path_in_root = "PedestrianRoadway"
 
 [node name="WomanCharacter" parent="." instance=ExtResource( 2 )]
 transform = Transform( -1.1, 0, -9.61651e-08, 0, 1.1, 0, 9.61651e-08, 0, -1.1, 0, 0, 0 )
@@ -38,12 +38,20 @@ initial_state_node_path = NodePath("IdleState")
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )
-movement_controller_node_path = NodePath("../../MovementController")
 animator_node_path = NodePath("../../WomanCharacter")
+_roadway_node_path_str = "PedestrianRoadway"
 roadway_follower_node_path = NodePath("../../RoadwayFollower")
+movement_controller_node_path = NodePath("../../MovementController")
 
 [node name="WalkState" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
-movement_controller_node_path = NodePath("../../MovementController")
 animator_node_path = NodePath("../../WomanCharacter")
+_roadway_node_path_str = "PedestrianRoadway"
+roadway_follower_node_path = NodePath("../../RoadwayFollower")
+movement_controller_node_path = NodePath("../../MovementController")
+
+[node name="DriveState" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+animator_node_path = NodePath("../../WomanCharacter")
+_roadway_node_path_str = "CarRoadway"
 roadway_follower_node_path = NodePath("../../RoadwayFollower")

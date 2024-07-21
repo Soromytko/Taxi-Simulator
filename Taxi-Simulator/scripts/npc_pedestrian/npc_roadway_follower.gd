@@ -1,23 +1,13 @@
 extends RoadwayFollower
 class_name NPCRoadwayFollower
 
-export var _roadway_path_in_root : String
 onready var _rng := TimedRNG.new()
 var _next_waypoint : Waypoint
 
 
-func _ready():
-	roadway = get_tree().root.get_child(0).get_node_or_null(_roadway_path_in_root)
+func set_nearest_waypoint_as_current():
 	current_waypoint = roadway.get_nearest_waypoint(global_transform.origin)
-	call_deferred("_init_next_waypoint")
-
-
-func _init_next_waypoint():
 	_next_waypoint = _get_random_next_waypoint(current_waypoint)
-
-
-func _get_next_waypoint() -> Waypoint:
-	return _next_waypoint
 
 
 func set_next_waypoint_if_reached():
@@ -25,6 +15,11 @@ func set_next_waypoint_if_reached():
 		var next_waypoint := _next_waypoint
 		_next_waypoint = _get_random_next_waypoint(next_waypoint)
 		current_waypoint = next_waypoint
+
+
+# overridden
+func _get_next_waypoint() -> Waypoint:
+	return _next_waypoint
 
 
 func _get_random_next_waypoint(waypoint : Waypoint) -> Waypoint:
