@@ -1,4 +1,4 @@
-extends "../../human_movement_controller.gd"
+extends "../human_movement_controller.gd"
 
 
 func move_by_camera_view(direction : Vector3, delta : float):

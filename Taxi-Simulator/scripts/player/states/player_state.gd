@@ -1,7 +1,7 @@
 extends "res://scripts/state_machine/state_machine_state.gd"
 
 const class_player_input : Script = preload("res://scripts/player/player_input.gd")
-const class_movement_controller : Script = preload("./player_movement_controller.gd")
+const class_movement_controller : Script = preload("../player_movement_controller.gd")
 
 export(NodePath) var movement_controller_node_path
 export(NodePath) var animator_node_path
