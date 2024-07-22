@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/state_machine/state_machine.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://resources/player_movement_model.tres" type="Resource" id=7]
 [ext_resource path="res://scripts/player/states/player_fall_state.gd" type="Script" id=8]
 [ext_resource path="res://resources/player_fall_movement_model.tres" type="Resource" id=9]
+[ext_resource path="res://scripts/player/states/drive_state.gd" type="Script" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.301
@@ -38,18 +39,23 @@ initial_state_node_path = NodePath("IdleState")
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
-movement_controller_node_path = NodePath("../../MovementController")
 animator_node_path = NodePath("../../TaxiDriverCharacter")
+movement_controller_node_path = NodePath("../../MovementController")
 movement_model_resource = ExtResource( 7 )
 
 [node name="WalkState" type="Node" parent="StateMachine"]
 script = ExtResource( 4 )
-movement_controller_node_path = NodePath("../../MovementController")
 animator_node_path = NodePath("../../TaxiDriverCharacter")
+movement_controller_node_path = NodePath("../../MovementController")
 movement_model_resource = ExtResource( 7 )
 
 [node name="FallState" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
-movement_controller_node_path = NodePath("../../MovementController")
 animator_node_path = NodePath("../../TaxiDriverCharacter")
+movement_controller_node_path = NodePath("../../MovementController")
 movement_model_resource = ExtResource( 9 )
+
+[node name="DriveState" type="Node" parent="StateMachine"]
+script = ExtResource( 10 )
+animator_node_path = NodePath("../../TaxiDriverCharacter")
+_player_node_path = NodePath("../..")

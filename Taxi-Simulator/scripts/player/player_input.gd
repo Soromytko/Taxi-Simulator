@@ -11,3 +11,6 @@ static func get_move_axes() -> Vector3:
 static func get_is_jump() -> bool:
 	return Input.get_action_strength("jump") == 1
 
+
+static func get_is_action() -> bool:
+	return Input.is_action_just_pressed("action")

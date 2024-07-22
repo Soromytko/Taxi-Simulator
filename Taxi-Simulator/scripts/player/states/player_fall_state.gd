@@ -1,8 +1,4 @@
-extends "./player_state.gd"
-
-
-func _on_enter():
-	._on_enter()
+extends "./movement_player_state.gd"
 
 
 func _on_physics_update(delta : float):
