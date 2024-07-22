@@ -6,7 +6,7 @@ func _on_enter():
 
 
 func _on_physics_update(delta : float):
-	var input : Vector3 = class_player_input.get_move_axes()
+	var input : Vector3 = PlayerInput.get_move_axes()
 	if input == Vector3.ZERO:
 		_switch_state("IdleState")
 		return

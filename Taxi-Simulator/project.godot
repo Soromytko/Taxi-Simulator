@@ -74,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/npc_spawner.gd"
 }, {
+"base": "Reference",
+"class": "PlayerInput",
+"language": "GDScript",
+"path": "res://scripts/player/player_input.gd"
+}, {
 "base": "Spatial",
 "class": "Roadway",
 "language": "GDScript",
@@ -128,6 +133,7 @@ _global_script_class_icons={
 "NPCMovementController": "",
 "NPCRoadwayFollower": "",
 "NPCSpawner": "",
+"PlayerInput": "",
 "Roadway": "",
 "RoadwayFollower": "",
 "StateMachine": "",

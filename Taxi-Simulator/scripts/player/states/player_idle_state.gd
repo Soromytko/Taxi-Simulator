@@ -6,7 +6,7 @@ func _on_enter():
 
 
 func _on_physics_update(delta : float):
-	if class_player_input.get_move_axes() != Vector3.ZERO:
+	if PlayerInput.get_move_axes() != Vector3.ZERO:
 		_switch_state("WalkState")
 		return
 	elif not _is_grounded():

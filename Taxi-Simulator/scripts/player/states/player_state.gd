@@ -1,6 +1,5 @@
 extends "res://scripts/state_machine/state_machine_state.gd"
 
-const class_player_input : Script = preload("res://scripts/player/player_input.gd")
 const class_movement_controller : Script = preload("../player_movement_controller.gd")
 
 export(NodePath) var movement_controller_node_path
@@ -47,6 +46,6 @@ func _process_gravity(delta : float):
 
 
 func _process_jump():
-	if class_player_input.get_is_jump():
+	if PlayerInput.get_is_jump():
 		if movement_controller.is_grounded():
 			movement_controller.jump()
