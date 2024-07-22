@@ -9,7 +9,7 @@ func _on_physics_update(delta : float):
 	if _is_grounded():
 		_switch_state("WalkState")
 		return
-	var input : Vector3 = class_player_input.get_move_axes()
+	var input : Vector3 = PlayerInput.get_move_axes()
 	
 	_process_gravity(delta)
 	_process_jump()

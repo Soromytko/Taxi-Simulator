@@ -1,3 +1,6 @@
+class_name PlayerInput
+
+
 static func get_move_axes() -> Vector3:
 	var input = Vector3.ZERO
 	input.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
