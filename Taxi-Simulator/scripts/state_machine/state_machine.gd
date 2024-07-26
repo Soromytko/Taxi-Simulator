@@ -19,43 +19,34 @@ func _ready():
 				current_state = _initial_state
 
 
-func add_state(name, state : StateMachineState):
-	states[name] = state
+func add_state(state_name : String, state : StateMachineState):
+	states[state_name] = state
 
 
-func switch_state(name):
-	if !states.has(name):
-		print(name, " is a not state")
+func switch_state(state_name : String):
+	if !states.has(state_name):
+		print(state_name, " is a not state")
 		return
-	if current_state_name == name:
+	if current_state_name == state_name:
 		return
 		
 	if current_state:
 		current_state._on_exit()
-	current_state = states[name]
-	current_state_name = name
+	current_state = states[state_name]
+	current_state_name = state_name
 	current_state._on_enter()
 
 
-func update(delta):
-	if current_state:
-		var new_state_name = current_state._on_update(delta)
-		if states.has(new_state_name):
-			var new_state = states[new_state_name]
-			if new_state != current_state:
-				switch_state(new_state_name)
-
-
-func _on_switch_state(state_name):
+func _on_switch_state(state_name : String):
 	switch_state(state_name)
 
 
-func _process(delta):
+func _process(delta : float):
 	if current_state:
 		current_state._on_update(delta)
 
 
-func _physics_process(delta):
+func _physics_process(delta : float):
 	if current_state:
 		current_state._on_physics_update(delta)
 
