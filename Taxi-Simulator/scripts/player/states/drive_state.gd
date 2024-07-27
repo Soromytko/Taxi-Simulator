@@ -17,12 +17,12 @@ func _on_physics_update(delta : float):
 		return
 	
 	if PlayerInput.get_is_car_forward():
-		vehicle.press_gas(25)
+		vehicle.press_gas(1.0)
 	else:
 		vehicle.depress_gas()
 		
 	if PlayerInput.get_is_car_back():
-		vehicle.press_brake(5)
+		vehicle.press_brake(1.0)
 	else:
 		vehicle.depress_brake()
 	

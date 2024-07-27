@@ -18,12 +18,12 @@ func _on_physics_update(delta : float):
 func _drive(delta : float):
 	var target_steering = _calculate_steering()
 	vehicle.steering = move_toward(vehicle.steering, target_steering, delta * _steer_speed)
-	vehicle.press_gas(4)
+	vehicle.press_gas(1.0)
 	vehicle.depress_brake()
 	if abs(target_steering) > deg2rad(30):
 		var damping := pow(target_steering, 2)
 		vehicle.press_brake(vehicle.engine_force * damping)
-		vehicle.press_gas(4.0 / damping)
+		vehicle.press_gas(1.0 / damping)
 
 
 func _calculate_steering() -> float:

@@ -3,6 +3,10 @@ class_name Vehicle
 
 signal is_braking_changed(value)
 
+export var engine_power : float = 5.0
+export var brake_power : float = 3.0
+export var steering_limit : float = 0.5
+
 var _riders : Dictionary = {}
 var is_braking : bool setget _set_is_braking, get_is_braking
 var _is_braking : bool = false
@@ -38,22 +42,24 @@ func has_driver() -> bool:
 	return _riders.has(VehicleSeat.Type.LeftFrontDriver)
 
 
+#Range from 0 to 1
 func press_gas(force : float):
-	set_engine_force(force)
+	set_engine_force(engine_power * clamp(force, 0, 1))
 
 
 func depress_gas():
 	set_engine_force(0.0)
 
 
+#Range from 0 to 1
 func press_brake(force : float):
-	set_brake(force)
+	set_brake(brake_power * clamp(force, 0, 1))
 
 
 func depress_brake():
 	set_brake(0.0)
 
 
-# Range from 0 to 1
+#Range from -1 to 1
 func set_steering_progress(progress : float):
-	set_steering(progress)
+	set_steering(steering_limit * clamp(progress, -1, 1))
