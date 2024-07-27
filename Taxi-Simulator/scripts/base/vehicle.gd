@@ -52,3 +52,8 @@ func press_brake(force : float):
 
 func depress_brake():
 	set_brake(0.0)
+
+
+# Range from 0 to 1
+func set_steering_progress(progress : float):
+	set_steering(progress)
