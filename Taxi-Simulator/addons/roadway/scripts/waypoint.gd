@@ -17,12 +17,22 @@ export var add_back_joined_waypoint : bool setget _add_back_joined_waypoint_clic
 
 export(Array, NodePath) var connected_waypoint_node_paths : Array setget _set_connected_waypoint_node_paths, _get_connected_waypoint_node_paths
 
+var id : int setget , get_id
 var connected_waypoints : Array
 
+var _id : int = -1
 var _connected_waypoint_node_paths : Array
 var _lines : Array
 
 onready var _is_ready : bool = true
+
+
+func get_id() -> int:
+	return _id
+
+
+func _set_id(value : int):
+	_id = value
 
 
 func validate_prev_and_next():

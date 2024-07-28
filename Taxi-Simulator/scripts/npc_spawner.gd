@@ -42,7 +42,7 @@ func _on_spawn_npc_deferred(npc : PhysicsBody, waypoint : Waypoint):
 
 func _get_suitable_waypoints() -> Array:
 	var result : Array = []
-	for waypoint in _roadway._waypoints:
+	for waypoint in _roadway.get_waypoints():
 		var distance := _observer.global_transform.origin.distance_to(waypoint.global_transform.origin)
 		if distance == clamp(distance, _min_distance, _max_distance):
 			result.append(waypoint)
