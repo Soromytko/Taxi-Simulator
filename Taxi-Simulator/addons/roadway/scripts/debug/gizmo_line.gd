@@ -14,7 +14,7 @@ func draw(start : Vector3, end : Vector3, color : Color = Color.white):
 	_line.transform.origin = Vector3.ZERO
 	_line.begin(Mesh.PRIMITIVE_LINE_STRIP)
 	_line.set_material_override(_create_material())
-	_line.set_color(Color.red)
+	_line.set_color(color)
 	_line.add_vertex(to_local(start))
 	_line.add_vertex(to_local(end))
 	_line.end()
