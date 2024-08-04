@@ -9,6 +9,7 @@ enum WaypointJoinType {
 }
 
 const CLASS_TWO_POINTS_LINE : Script = preload("./debug/two_points_line.gd")
+const LINE_COLOR : Color = Color.red
 
 #Hack to create a button in the inspector
 export var add_forward_joined_waypoint : bool setget _add_forward_joined_waypoint_clicked
@@ -138,11 +139,13 @@ func _update_lines():
 	if _lines.size() < connected_waypoints.size():
 		for i in range(_lines.size(), connected_waypoints.size(), 1):
 			var line := CLASS_TWO_POINTS_LINE.new()
+			line.color = LINE_COLOR
 			_lines.append(line)
 			add_child(line)
 	else:
 		for i in range(_lines.size() - 1, connected_waypoints.size() - 1, -1):
 			var line : CLASS_TWO_POINTS_LINE = _lines[i]
+			line.color = LINE_COLOR
 			line.clear()
 			line.queue_free()
 			remove_child(line)
