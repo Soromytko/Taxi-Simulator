@@ -1,3 +1,4 @@
+extends Interaction
 class_name HumanVehicleInteraction
 
 

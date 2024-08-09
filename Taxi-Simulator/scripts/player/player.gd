@@ -44,3 +44,9 @@ func get_out_of_vehicle_instantly():
 	$CollisionShape.disabled = false
 	$StateMachine/DriveState.vehicle = null
 	$StateMachine.switch_state("IdleState")
+
+
+func _on_interacted(interactable : Interactable):
+	
+	pass
+
