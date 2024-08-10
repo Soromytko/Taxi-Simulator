@@ -35,7 +35,7 @@ transform = Transform( -0.528, 0, -7.97258e-08, 0, 0.518651, 0, 7.97258e-08, 0, 
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 2 )
-initial_state_node_path = NodePath("IdleState")
+_initial_state = "IdleState"
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )

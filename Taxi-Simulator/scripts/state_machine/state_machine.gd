@@ -1,9 +1,7 @@
 extends Node
 class_name StateMachine
 
-export(NodePath) var initial_state_node_path
-
-onready var _initial_state : StateMachineState = get_node(initial_state_node_path)
+export var _initial_state : String
 
 var states = {}
 var current_state_name : String
@@ -15,8 +13,8 @@ func _ready():
 		if child is StateMachineState:
 			child.connect("transitioned", self, "_on_switch_state")
 			add_state(child.name, child)
-			if _initial_state == child:
-				current_state = _initial_state
+	if _initial_state.length() > 0:
+		switch_state(_initial_state)
 
 
 func add_state(state_name : String, state : StateMachineState):
