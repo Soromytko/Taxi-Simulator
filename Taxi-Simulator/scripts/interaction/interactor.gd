@@ -67,6 +67,8 @@ func _reveal_interactable():
 
 func _get_interactables() -> Array:
 	var result := []
+	if !monitoring:
+		return result
 	for area in get_overlapping_areas():
 		if area is Interactable:
 			result.append(area)
