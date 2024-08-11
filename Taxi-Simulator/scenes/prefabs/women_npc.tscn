@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/npc_pedestrian/npc.gd" type="Script" id=1]
 [ext_resource path="res://scenes/prefabs/woman_character.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scripts/npc_pedestrian/states/npc_idle_state.gd" type="Script" id=7]
 [ext_resource path="res://scripts/npc_pedestrian/states/npc_walk_state.gd" type="Script" id=8]
 [ext_resource path="res://scripts/npc_pedestrian/states/npc_drive_state.gd" type="Script" id=9]
+[ext_resource path="res://scenes/prefabs/interaction/interactable.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.301
@@ -41,6 +42,7 @@ script = ExtResource( 7 )
 animator_node_path = NodePath("../../WomanCharacter")
 _roadway_node_path_str = "PedestrianRoadway"
 roadway_follower_node_path = NodePath("../../RoadwayFollower")
+_interactable_node_path = NodePath("../../Interactable")
 movement_controller_node_path = NodePath("../../MovementController")
 
 [node name="WalkState" type="Node" parent="StateMachine"]
@@ -48,6 +50,7 @@ script = ExtResource( 8 )
 animator_node_path = NodePath("../../WomanCharacter")
 _roadway_node_path_str = "PedestrianRoadway"
 roadway_follower_node_path = NodePath("../../RoadwayFollower")
+_interactable_node_path = NodePath("../../Interactable")
 movement_controller_node_path = NodePath("../../MovementController")
 
 [node name="DriveState" type="Node" parent="StateMachine"]
@@ -55,3 +58,7 @@ script = ExtResource( 9 )
 animator_node_path = NodePath("../../WomanCharacter")
 _roadway_node_path_str = "CarRoadway"
 roadway_follower_node_path = NodePath("../../RoadwayFollower")
+_interactable_node_path = NodePath("../../Interactable")
+
+[node name="Interactable" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32627, -0.22608 )

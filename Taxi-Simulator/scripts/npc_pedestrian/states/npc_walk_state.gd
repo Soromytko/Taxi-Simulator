@@ -6,6 +6,7 @@ onready var _walk_anim_bool := BooleanAnimatorProperty.new(_animator, "idle_walk
 func _on_enter():
 	_walk_anim_bool.value = true
 	_init_roadway_follower()
+	_enable_interactable()
 
 
 func _on_physics_update(delta : float):
@@ -22,4 +23,5 @@ func _move(delta : float):
 
 func _on_exit():
 	_walk_anim_bool.value = false
+	_disable_interactable()
 
