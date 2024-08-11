@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/animator/boolean_animator_property.gd"
 }, {
+"base": "Interactable",
+"class": "CarDoorInteractable",
+"language": "GDScript",
+"path": "res://scripts/car_door_interactable.gd"
+}, {
 "base": "Vehicle",
 "class": "CarNPC",
 "language": "GDScript",
@@ -139,6 +144,7 @@ _global_script_class_icons={
 "AnimatorProperty": "",
 "BlendAnimatorProperty": "",
 "BooleanAnimatorProperty": "",
+"CarDoorInteractable": "",
 "CarNPC": "",
 "CarNPCSpawner": "",
 "GameCloser": "",

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/state_machine/state_machine.gd" type="Script" id=2]
@@ -10,10 +10,14 @@
 [ext_resource path="res://scripts/player/states/player_fall_state.gd" type="Script" id=8]
 [ext_resource path="res://resources/player_fall_movement_model.tres" type="Resource" id=9]
 [ext_resource path="res://scripts/player/states/drive_state.gd" type="Script" id=10]
+[ext_resource path="res://scenes/prefabs/interaction/interactor.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.301
 height = 1.238
+
+[sub_resource type="SphereShape" id=2]
+radius = 0.8
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
@@ -40,22 +44,39 @@ _initial_state = "IdleState"
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
 animator_node_path = NodePath("../../TaxiDriverCharacter")
+_interactor_node_path = NodePath("../../Interactor")
 movement_controller_node_path = NodePath("../../MovementController")
 movement_model_resource = ExtResource( 7 )
 
 [node name="WalkState" type="Node" parent="StateMachine"]
 script = ExtResource( 4 )
 animator_node_path = NodePath("../../TaxiDriverCharacter")
+_interactor_node_path = NodePath("../../Interactor")
 movement_controller_node_path = NodePath("../../MovementController")
 movement_model_resource = ExtResource( 7 )
 
 [node name="FallState" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
 animator_node_path = NodePath("../../TaxiDriverCharacter")
+_interactor_node_path = NodePath("../../Interactor")
 movement_controller_node_path = NodePath("../../MovementController")
 movement_model_resource = ExtResource( 9 )
 
 [node name="DriveState" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
 animator_node_path = NodePath("../../TaxiDriverCharacter")
+_interactor_node_path = NodePath("../../Interactor")
 _player_node_path = NodePath("../..")
+
+[node name="Interactor" parent="." instance=ExtResource( 11 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="Interactor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27834, -0.436785 )
+shape = SubResource( 2 )
+
+[node name="Label3D" type="Label3D" parent="Interactor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.772691, 4.76837e-07, -1.45669 )
+billboard = 1
+double_sided = false
+no_depth_test = true
+text = "Press \"F\" to interact"
