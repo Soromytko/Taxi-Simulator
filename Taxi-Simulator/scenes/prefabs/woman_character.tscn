@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://resources/woman.glb" type="PackedScene" id=1]
 [ext_resource path="res://scripts/animator/animator.gd" type="Script" id=2]
 
 [sub_resource type="AnimationNodeAnimation" id=5]
+animation = "idle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "idle-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=7]
@@ -19,12 +22,30 @@ switch_mode = 1
 advance_condition = "walk_idle"
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+switch_mode = 1
+advance_condition = "taxi_catching_off"
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+switch_mode = 1
+advance_condition = "taxi_catching_on"
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+switch_mode = 1
+advance_condition = "taxi_catching_on"
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=6]
 states/idle-loop/node = SubResource( 5 )
 states/idle-loop/position = Vector2( 345, 158 )
+states/taxi-catching/node = SubResource( 10 )
+states/taxi-catching/position = Vector2( 464, 275 )
 states/walk-loop/node = SubResource( 7 )
 states/walk-loop/position = Vector2( 586, 158 )
-transitions = [ "idle-loop", "walk-loop", SubResource( 8 ), "walk-loop", "idle-loop", SubResource( 9 ) ]
+transitions = [ "idle-loop", "walk-loop", SubResource( 8 ), "walk-loop", "idle-loop", SubResource( 9 ), "taxi-catching", "idle-loop", SubResource( 11 ), "idle-loop", "taxi-catching", SubResource( 12 ), "walk-loop", "taxi-catching", SubResource( 13 ) ]
+graph_offset = Vector2( -79, 83 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=4]
 
@@ -38,4 +59,6 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 4 )
 parameters/conditions/idle_walk = false
+parameters/conditions/taxi_catching_off = false
+parameters/conditions/taxi_catching_on = false
 parameters/conditions/walk_idle = false

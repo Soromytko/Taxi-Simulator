@@ -21,4 +21,10 @@ func get_out_of_vehicle_instantly():
 
 func _ready():
 	_animator.start_playback("idle-loop")
+	_catch_taxi_if_random()
 
+
+func _catch_taxi_if_random():
+	var rng := TimedRNG.new()
+	if rng.randi_range(1, 10) <= 3:
+		$StateMachine.switch_state("CatchTaxiState")

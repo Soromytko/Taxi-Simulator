@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://city_prototype/lowpoly_city.glb" type="PackedScene" id=1]
 [ext_resource path="res://scripts/game_closer.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scripts/npcs/car_npc/car_npc_spawner.gd" type="Script" id=8]
 [ext_resource path="res://scenes/car.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/prefabs/third_person_camera.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scripts/cars/taxi_car.gd" type="Script" id=11]
 
 [sub_resource type="HeightMapShape" id=1]
 map_width = 100
@@ -62,4 +63,5 @@ _driver_packed_scenes = [ ExtResource( 3 ) ]
 
 [node name="Car" parent="." instance=ExtResource( 9 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -39.7572, 7.15256e-06, 22.8243 )
+script = ExtResource( 11 )
 engine_power = 20.0
