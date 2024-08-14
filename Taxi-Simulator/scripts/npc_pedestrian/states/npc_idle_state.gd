@@ -10,6 +10,8 @@ func _on_enter():
 
 
 func _on_physics_update(delta : float):
+	_process_gravity(delta)
+	
 	if _roadway_follower.current_waypoint != null:
 		_switch_state(States.WALK)
 
