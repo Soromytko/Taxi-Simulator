@@ -1,10 +1,10 @@
 extends "./npc_movement_state.gd"
 
-onready var _walk_anim_bool := BooleanAnimatorProperty.new(_animator, "idle_walk")
+onready var _walk_anim_transition := BooleanAnimatorProperty.new(_animator, "walk")
 
 
 func _on_enter():
-	_walk_anim_bool.value = true
+	_walk_anim_transition.value = true
 	_init_roadway_follower()
 	_enable_interactable()
 
@@ -22,6 +22,6 @@ func _move(delta : float):
 
 
 func _on_exit():
-	_walk_anim_bool.value = false
+	_walk_anim_transition.value = false
 	_disable_interactable()
 

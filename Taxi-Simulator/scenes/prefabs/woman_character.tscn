@@ -14,27 +14,27 @@ animation = "walk-loop"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=8]
 switch_mode = 1
-advance_condition = "idle_walk"
+advance_condition = "walk"
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=9]
 switch_mode = 1
-advance_condition = "walk_idle"
+advance_condition = "idle"
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=11]
 switch_mode = 1
-advance_condition = "taxi_catching_off"
+advance_condition = "idle"
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=12]
 switch_mode = 1
-advance_condition = "taxi_catching_on"
+advance_condition = "taxi_catching"
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=13]
 switch_mode = 1
-advance_condition = "taxi_catching_on"
+advance_condition = "taxi_catching"
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachine" id=6]
@@ -58,7 +58,6 @@ tree_root = SubResource( 6 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 4 )
-parameters/conditions/idle_walk = false
-parameters/conditions/taxi_catching_off = false
-parameters/conditions/taxi_catching_on = false
-parameters/conditions/walk_idle = false
+parameters/conditions/idle = false
+parameters/conditions/taxi_catching = false
+parameters/conditions/walk = false
