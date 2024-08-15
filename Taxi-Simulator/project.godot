@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/interaction/interactor.gd"
 }, {
+"base": "Control",
+"class": "Map",
+"language": "GDScript",
+"path": "res://scripts/map/map.gd"
+}, {
 "base": "RiderCharacter",
 "class": "NPC",
 "language": "GDScript",
@@ -129,6 +134,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/timed_rnd.gd"
 }, {
+"base": "Spatial",
+"class": "Tracker",
+"language": "GDScript",
+"path": "res://scripts/map/tracker.gd"
+}, {
 "base": "VehicleBody",
 "class": "Vehicle",
 "language": "GDScript",
@@ -157,6 +167,7 @@ _global_script_class_icons={
 "HumanVehicleInteraction": "",
 "Interactable": "",
 "Interactor": "",
+"Map": "",
 "NPC": "",
 "NPCMovementController": "",
 "NPCRoadwayFollower": "",
@@ -169,6 +180,7 @@ _global_script_class_icons={
 "StateMachineState": "",
 "TaxiCar": "",
 "TimedRNG": "",
+"Tracker": "",
 "Vehicle": "",
 "VehicleSeat": "",
 "Waypoint": ""

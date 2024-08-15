@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://city_prototype/lowpoly_city.glb" type="PackedScene" id=1]
 [ext_resource path="res://scripts/game_closer.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/car.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/prefabs/third_person_camera.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/cars/taxi_car.gd" type="Script" id=11]
+[ext_resource path="res://minimap.tscn" type="PackedScene" id=13]
 
 [sub_resource type="HeightMapShape" id=1]
 map_width = 100
@@ -20,8 +21,10 @@ map_data = PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 [node name="Spatial" type="Spatial"]
 
 [node name="PedestrianRoadway" parent="." instance=ExtResource( 4 )]
+visible = false
 
 [node name="CarRoadway" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="lowpoly_city" parent="." instance=ExtResource( 1 )]
 
@@ -65,3 +68,14 @@ _driver_packed_scenes = [ ExtResource( 3 ) ]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -39.7572, 7.15256e-06, 22.8243 )
 script = ExtResource( 11 )
 engine_power = 20.0
+
+[node name="Minimap" parent="." instance=ExtResource( 13 )]
+_player_node_path = NodePath("../Player")
+_start_point_node_path = NodePath("../StartMapPoint")
+_end_point_node_path = NodePath("../EndMapPoint")
+
+[node name="StartMapPoint" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -74.5901, 0, -24.9959 )
+
+[node name="EndMapPoint" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0183, 0, 73.3756 )
