@@ -24,6 +24,8 @@ func set_is_taxi_required(value : bool):
 		_is_taxi_required = value
 		var property_value = true if value else null
 		_is_taxi_required_blackboard_property.value = property_value
+		$Tracker.visible_on_map = value
+		$Tracker.tracking = value
 
 
 func get_destination() -> Vector3:
@@ -60,6 +62,8 @@ func get_into_vehicle_instantly(vehicle : Vehicle, seat_key : String):
 	$NavigationAgent.radius = 3
 	$DriveMovementController.vehicle = vehicle
 	$MovementController.set_physics_process(false)
+	$Tracker.visible_on_map = false
+	$Tracker.tracking = false
 	_vehicle_blackboard_property.value = vehicle
 	if vehicle is TaxiCar:
 		_debug_mesh_instance = MeshInstance.new()

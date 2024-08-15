@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scripts/npc/npc.gd" type="Script" id=1]
 [ext_resource path="res://scenes/prefabs/woman_character.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://scripts/npc/tasks/get_out_taxi_bt_task.gd" type="Script" id=21]
 [ext_resource path="res://scripts/behaviour_tree/tasks/print_message_task.gd" type="Script" id=22]
 [ext_resource path="res://scripts/behaviour_tree/tasks/call_actor_method_task.gd" type="Script" id=23]
+[ext_resource path="res://scripts/map/tracker.gd" type="Script" id=24]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.301
@@ -145,3 +146,12 @@ visible = false
 billboard = 1
 double_sided = false
 texture = ExtResource( 19 )
+
+[node name="Tracker" type="Spatial" parent="."]
+script = ExtResource( 24 )
+visible_on_map = false
+tracking = false
+map_name = "Minimap"
+_marker_texture = ExtResource( 19 )
+_marker_offset = Vector2( -25, -51 )
+_marker_scale = Vector2( 0.1, 0.1 )

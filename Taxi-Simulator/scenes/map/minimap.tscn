@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/map/map.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/map/map.tscn" type="PackedScene" id=3]
+
+[node name="Minimap" type="Control"]
+anchor_left = 0.802
+anchor_top = 0.595
+anchor_right = 1.0
+anchor_bottom = 0.595
+margin_left = 13.752
+margin_top = -168.0
+margin_right = -39.0
+margin_bottom = 31.9999
+mouse_filter = 2
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 160.0
+margin_bottom = 210.0
+color = Color( 0.141176, 0.133333, 0.133333, 1 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+margin_right = 150.0
+margin_bottom = 200.0
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 150, 200 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Map" parent="ViewportContainer/Viewport" instance=ExtResource( 3 )]
+
+[node name="TextureButton" type="TextureRect" parent="."]
+margin_left = 68.6
+margin_top = 93.6
+margin_right = 132.6
+margin_bottom = 157.6
+rect_scale = Vector2( 0.2, 0.2 )
+rect_pivot_offset = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
