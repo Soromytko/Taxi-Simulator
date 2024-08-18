@@ -20,8 +20,10 @@ map_data = PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 [node name="Spatial" type="Spatial"]
 
 [node name="PedestrianRoadway" parent="." instance=ExtResource( 4 )]
+visible = false
 
 [node name="CarRoadway" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="lowpoly_city" parent="." instance=ExtResource( 1 )]
 
@@ -29,6 +31,7 @@ map_data = PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 
 [node name="CollisionShape" type="CollisionShape" parent="lowpoly_city/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.1323, 7.62939e-06, 23.7726 )
+visible = false
 shape = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
