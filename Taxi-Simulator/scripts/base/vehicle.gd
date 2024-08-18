@@ -3,6 +3,8 @@ class_name Vehicle
 
 signal is_braking_changed(value)
 
+var speed : float setget , get_speed
+
 export var engine_power : float = 5.0
 export var brake_power : float = 3.0
 export var steering_limit : float = 0.5
@@ -10,6 +12,10 @@ export var steering_limit : float = 0.5
 var _riders : Dictionary = {}
 var is_braking : bool setget _set_is_braking, get_is_braking
 var _is_braking : bool = false
+
+
+func get_speed() -> float:
+	return linear_velocity.length()
 
 
 # overridden
