@@ -1,5 +1,7 @@
 extends Spatial
 
+signal moved(velocity)
+
 export(NodePath) var kinematic_body_node_path
 
 var kinematic_body : KinematicBody setget set_kinematic_body, get_kinematic_body
@@ -45,6 +47,7 @@ func accelerate_vertical(acceleration : float, max_speed : float):
 
 func apply_velocity():
 	velocity = kinematic_body.move_and_slide(velocity, Vector3.UP)
+	emit_signal("moved", velocity)
 
 
 func fade_horizontal_velocity(damping : float, max_speed : float):
