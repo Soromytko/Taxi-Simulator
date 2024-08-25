@@ -11,15 +11,16 @@ func _on_enter():
 
 func _on_physics_update(delta : float):
 	_process_gravity(delta)
-	if _roadway_follower.current_waypoint == null:
-		_switch_state(States.IDLE)
+	var next_position := _roadway_follower.get_next_path_position()
+	if next_position == _roadway_follower.global_transform.origin:
+		set_random_target_position()
 		return
-	_move(delta)
-	_roadway_follower.set_next_waypoint_if_reached()
+	_move(next_position, delta)
 
 
-func _move(delta : float):
-	_movement_controller.move(_roadway_follower._get_direction_to_current_waypoint().normalized(), delta)
+func _move(target_position : Vector3, delta : float):
+	var direction := (target_position - _roadway_follower.global_transform.origin).normalized()
+	_movement_controller.move(direction, delta)
 
 
 func _on_exit():

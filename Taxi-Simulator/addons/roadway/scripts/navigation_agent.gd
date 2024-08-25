@@ -1,42 +1,34 @@
 extends Spatial
 
-export var roadway_node_path : NodePath
-onready var roadway : Roadway = get_node_or_null(roadway_node_path)
-var current_waypoint : Waypoint
+var target_position : Vector3 setget set_target_position, get_target_position
+var roadway : Roadway
+var path_waypoints : Array
+var _target_position : Vector3
 
 
-func _is_reach_current_roadpoint() -> bool:
-	if current_waypoint.global_transform.origin.distance_to(global_transform.origin) < 0.5:
-		return true
-	var next_waypoint : Waypoint = _get_next_waypoint()
-	if next_waypoint == null:
-		return false
-	var current_waypoint_direction : Vector3 = -_get_direction_to_waypoint(current_waypoint)
-	var new_waypoint_direction : Vector3 = next_waypoint.global_transform.origin - current_waypoint.global_transform.origin
-	var project := current_waypoint_direction.project(new_waypoint_direction)
-	return (project + new_waypoint_direction).length() > new_waypoint_direction.length()
+func set_target_position(value : Vector3):
+	_target_position = value
 
 
-func _get_next_waypoint() -> Waypoint:
-	return null if current_waypoint.connected_waypoints.size() == 0 \
-		else current_waypoint.connected_waypoints[0]
+func get_target_position() -> Vector3:
+	return _target_position
 
 
-func _get_direction_to_current_waypoint() -> Vector3:
-	return current_waypoint.global_transform.origin - global_transform.origin
+func get_next_path_position() -> Vector3:
+	_update_path()
+	# TODO: Don't take into account the first path position,
+	# because it may be behind the character.
+	# This is the wrong behavior.
+	if path_waypoints.size() > 1:
+		return path_waypoints[1].global_transform.origin
+	return global_transform.origin
 
 
-func _get_direction_to_waypoint(waypoint : Waypoint) -> Vector3:
-	return waypoint.global_transform.origin - global_transform.origin
+func get_nearest_waypoint() -> Waypoint:
+	return roadway.get_nearest_waypoint(global_transform.origin)
 
 
-func _get_distance_to_waypoint(waypoint : Waypoint) -> float:
-	return global_transform.origin.distance_to(waypoint.global_transform.origin)
-
-
-func _get_angle_beween_waypoint(waypoint : Waypoint) -> float:
-	var direction_to_waypoint := _get_direction_to_waypoint(waypoint)
-	var right_direction := global_transform.basis.x
-	var angle : float = right_direction.angle_to(direction_to_waypoint)
-	return -angle + PI / 2
+func _update_path():
+	# TODO: Rebuilding the path every tick is not an optimal solution.
+	path_waypoints = roadway.build_path(global_transform.origin, target_position)
 

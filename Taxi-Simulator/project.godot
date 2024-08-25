@@ -124,11 +124,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/npc_pedestrian/movement_controller/npc_pedestrian_movement_controller.gd"
 }, {
-"base": "RoadwayFollower",
-"class": "NPCRoadwayFollower",
-"language": "GDScript",
-"path": "res://scripts/npc_pedestrian/npc_roadway_follower.gd"
-}, {
 "base": "Spatial",
 "class": "NPCSpawner",
 "language": "GDScript",
@@ -213,7 +208,6 @@ _global_script_class_icons={
 "Interactor": "",
 "NPC": "",
 "NPCMovementController": "",
-"NPCRoadwayFollower": "",
 "NPCSpawner": "",
 "PlayerInput": "",
 "RiderCharacter": "",
