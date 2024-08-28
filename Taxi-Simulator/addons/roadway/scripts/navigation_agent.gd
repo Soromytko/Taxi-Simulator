@@ -1,4 +1,5 @@
 extends Spatial
+class_name RWNavigationAgent
 
 var target_position : Vector3 setget set_target_position, get_target_position
 var roadway : Roadway

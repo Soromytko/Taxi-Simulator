@@ -5,16 +5,16 @@ var _steer_speed : float = 1.0
 
 
 func _on_enter():
-	_init_roadway_follower()
+	_init_navigation_agent()
 
 
 func _on_physics_update(delta : float):
-	var next_position = _roadway_follower.get_next_path_position()
+	var next_position = _navigation_agent.get_next_path_position()
 	_drive(delta, next_position)
 
 
 func _drive(delta : float, next_position : Vector3):
-	if next_position == _roadway_follower.global_transform.origin:
+	if next_position == _navigation_agent.global_transform.origin:
 		vehicle.press_brake(2)
 		return
 	var target_steering = _calculate_steering(next_position)
@@ -28,7 +28,7 @@ func _drive(delta : float, next_position : Vector3):
 
 
 func _calculate_steering(next_position : Vector3) -> float:
-	var movement_direction := _roadway_follower.global_transform.origin.direction_to(next_position)
+	var movement_direction := _navigation_agent.global_transform.origin.direction_to(next_position)
 	var right_direction := vehicle.global_transform.basis.x
 	var angle : float = right_direction.angle_to(movement_direction)
 	return -angle + PI / 2

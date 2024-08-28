@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/npc_pedestrian/npc.gd" type="Script" id=1]
 [ext_resource path="res://scenes/prefabs/woman_character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/npc_pedestrian_movement_model.tres" type="Resource" id=3]
-[ext_resource path="res://scripts/registered_plugin_types/roadway_follower.gd" type="Script" id=4]
+[ext_resource path="res://addons/roadway/scripts/navigation_agent.gd" type="Script" id=4]
 [ext_resource path="res://scripts/npc_pedestrian/movement_controller/npc_pedestrian_movement_controller.gd" type="Script" id=5]
 [ext_resource path="res://scripts/state_machine/state_machine.gd" type="Script" id=6]
 [ext_resource path="res://scripts/npc_pedestrian/states/npc_idle_state.gd" type="Script" id=7]
@@ -31,7 +31,7 @@ script = ExtResource( 5 )
 kinematic_body_node_path = NodePath("..")
 movement_model_resource = ExtResource( 3 )
 
-[node name="RoadwayFollower" type="Spatial" parent="."]
+[node name="NavigationAgent" type="Spatial" parent="."]
 script = ExtResource( 4 )
 
 [node name="WomanCharacter" parent="." instance=ExtResource( 2 )]
@@ -45,7 +45,7 @@ _initial_state = "IdleState"
 script = ExtResource( 7 )
 animator_node_path = NodePath("../../WomanCharacter")
 _roadway_node_path_str = "PedestrianRoadway"
-roadway_follower_node_path = NodePath("../../RoadwayFollower")
+_navigation_agent_node_path = NodePath("../../NavigationAgent")
 _interactable_node_path = NodePath("../../Interactable")
 _vision_area_node_path = NodePath("../../Vision")
 movement_controller_node_path = NodePath("../../MovementController")
@@ -54,7 +54,7 @@ movement_controller_node_path = NodePath("../../MovementController")
 script = ExtResource( 8 )
 animator_node_path = NodePath("../../WomanCharacter")
 _roadway_node_path_str = "PedestrianRoadway"
-roadway_follower_node_path = NodePath("../../RoadwayFollower")
+_navigation_agent_node_path = NodePath("../../NavigationAgent")
 _interactable_node_path = NodePath("../../Interactable")
 _vision_area_node_path = NodePath("../../Vision")
 movement_controller_node_path = NodePath("../../MovementController")
@@ -63,7 +63,7 @@ movement_controller_node_path = NodePath("../../MovementController")
 script = ExtResource( 9 )
 animator_node_path = NodePath("../../WomanCharacter")
 _roadway_node_path_str = "CarRoadway"
-roadway_follower_node_path = NodePath("../../RoadwayFollower")
+_navigation_agent_node_path = NodePath("../../NavigationAgent")
 _interactable_node_path = NodePath("../../Interactable")
 _vision_area_node_path = NodePath("../../Vision")
 
@@ -71,7 +71,7 @@ _vision_area_node_path = NodePath("../../Vision")
 script = ExtResource( 12 )
 animator_node_path = NodePath("../../WomanCharacter")
 _roadway_node_path_str = "PedestrianRoadway"
-roadway_follower_node_path = NodePath("../../RoadwayFollower")
+_navigation_agent_node_path = NodePath("../../NavigationAgent")
 _interactable_node_path = NodePath("../../Interactable")
 _vision_area_node_path = NodePath("../../Vision")
 movement_controller_node_path = NodePath("../../MovementController")
