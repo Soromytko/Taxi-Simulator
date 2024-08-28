@@ -6,7 +6,7 @@ var _timer : float = 0.0
 
 
 # Overridden
-func on_tick(delta : float, actor : Node, blackboard : BTBlackboard) -> int:
+func on_tick(delta : float) -> int:
 	_timer += delta
 	if _timer >= _time:
 		_timer = 0.0

@@ -7,10 +7,19 @@ var _last_tick_result : int = TickResult.FAILURE
 
 
 # Overridden
-func on_tick(delta : float, actor : Node, blackboard : BTBlackboard) -> int:
+func set_blackboard(value : BTBlackboard):
+	.set_blackboard(value)
+	for behaviour_node in _behaviour_nodes:
+		behaviour_node.set_blackboard(value)
+
+
+# Overridden
+func on_tick(delta : float) -> int:
+	if !_check_decorators(delta):
+		return TickResult.FAILURE
 	var behaviour_node := _get_behaviour_node()
 	if behaviour_node:
-		_last_tick_result = behaviour_node.on_tick(delta, actor, blackboard)
+		_last_tick_result = behaviour_node.on_tick(delta)
 	return _last_tick_result
 
 
@@ -50,4 +59,11 @@ func _get_next_behaviour_node() -> BTBehaviourNode:
 func _get_first_behaviour_node() -> BTBehaviourNode:
 	_behaviour_node_index = 0
 	return _get_current_behaviour_node()
-	
+
+
+func _check_decorators(delta : float) -> bool:
+	for decorator in _decorators:
+		if !decorator.on_check(delta):
+			return false
+	return true
+
