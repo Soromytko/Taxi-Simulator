@@ -44,7 +44,7 @@ func get_nearest_waypoint() -> Waypoint:
 
 func _update_path():
 	# TODO: Rebuilding the path every tick is not an optimal solution.
-	path_waypoints = roadway.build_path(global_transform.origin, target_position)
+	path_waypoints = roadway.build_path(global_transform.origin, _target_position)
 
 
 func _init_roadway():
