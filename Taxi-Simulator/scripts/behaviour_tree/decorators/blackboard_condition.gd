@@ -30,11 +30,20 @@ func on_check(_delta : float) -> bool:
 
 
 func _on_blackboard_value_changed(value):
-	if _notify_type == NotifyType.VALUE_CHANGED || \
-		_notify_type == NotifyType.VALUE_CHANGED && \
-		_last_blackboard_value != value:
+	if _is_reevaluated(value):
 		_last_blackboard_value = value
 		emit_signal("reevaluated")
+
+
+func _is_reevaluated(new_value) -> bool:
+	if _notify_type == NotifyType.VALUE_CHANGED:
+		if _last_blackboard_value != new_value:
+			return true
+	elif _notify_type == NotifyType.RESULT_CHANGED:
+		if _last_blackboard_value && !new_value || \
+			!_last_blackboard_value && new_value:
+			return true
+	return false
 
 
 # Overridden
