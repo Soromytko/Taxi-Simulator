@@ -5,6 +5,12 @@ onready var _movement_controller : NPCMovementController = $MovementController
 onready var _animator : Animator = $WomanCharacter
 
 
+
+# Overridden
+func get_vehicle() -> Vehicle:
+	return $StateMachine/DriveState.vehicle
+
+
 # overridden
 func get_into_vehicle_instantly(vehicle : Vehicle, _vehicle_seat_type : int):
 	$CollisionShape.disabled = true

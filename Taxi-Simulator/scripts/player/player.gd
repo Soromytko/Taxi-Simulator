@@ -5,6 +5,11 @@ export var radius : float = 1.0 setget set_radius, get_radius
 export var height : float = 2.0 setget set_height, get_height
 
 
+# Overridden
+func get_vehicle() -> Vehicle:
+	return $StateMachine/DriveState.vehicle
+
+
 func set_radius(value):
 	radius = value
 	_update_collision_shape_data()

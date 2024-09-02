@@ -2,7 +2,7 @@ class_name HumanVehicleInteraction
 
 
 static func get_into_vehicle_instantly(vehicle : Vehicle, driver : RiderCharacter):
-	if vehicle.has_driver() || driver.is_into_vehicle:
+	if vehicle.has_driver() || driver.has_vehicle():
 		return
 	vehicle.set_driver(driver)
 	driver.get_parent().remove_child(driver)
