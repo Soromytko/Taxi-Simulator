@@ -1,16 +1,22 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scripts/npc_pedestrian/npc.gd" type="Script" id=1]
 [ext_resource path="res://scenes/prefabs/woman_character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/npc_pedestrian_movement_model.tres" type="Resource" id=3]
 [ext_resource path="res://addons/roadway/scripts/navigation_agent.gd" type="Script" id=4]
 [ext_resource path="res://scripts/npc_pedestrian/movement_controller/npc_pedestrian_movement_controller.gd" type="Script" id=5]
-[ext_resource path="res://scripts/state_machine/state_machine.gd" type="Script" id=6]
-[ext_resource path="res://scripts/npc_pedestrian/states/npc_idle_state.gd" type="Script" id=7]
-[ext_resource path="res://scripts/npc_pedestrian/states/npc_walk_state.gd" type="Script" id=8]
-[ext_resource path="res://scripts/npc_pedestrian/states/npc_drive_state.gd" type="Script" id=9]
+[ext_resource path="res://scripts/behaviour_tree/decorators/blackboard_condition.gd" type="Script" id=6]
+[ext_resource path="res://scripts/npcs/DriveMovementController.gd" type="Script" id=7]
+[ext_resource path="res://scripts/behaviour_tree/tasks/wait_task.gd" type="Script" id=8]
+[ext_resource path="res://scripts/npc_pedestrian/tasks/catch_taxi_bt_tast.gd" type="Script" id=9]
 [ext_resource path="res://scenes/prefabs/interaction/interactable.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scripts/npc_pedestrian/states/npc_catch_taxi_state.gd" type="Script" id=12]
+[ext_resource path="res://scripts/behaviour_tree/composites/selector.gd" type="Script" id=11]
+[ext_resource path="res://scripts/npc_pedestrian/vision.gd" type="Script" id=12]
+[ext_resource path="res://scripts/behaviour_tree/behaviour_tree.gd" type="Script" id=13]
+[ext_resource path="res://scripts/behaviour_tree/composites/sequence.gd" type="Script" id=14]
+[ext_resource path="res://scripts/behaviour_tree/blackboard.gd" type="Script" id=15]
+[ext_resource path="res://scripts/behaviour_tree/move_to.gd" type="Script" id=17]
+[ext_resource path="res://scripts/npc_pedestrian/tasks/set_random_waypoint_bt_task.gd" type="Script" id=18]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.301
@@ -31,57 +37,91 @@ script = ExtResource( 5 )
 kinematic_body_node_path = NodePath("..")
 movement_model_resource = ExtResource( 3 )
 
+[node name="DriveMovementController" type="Spatial" parent="."]
+script = ExtResource( 7 )
+
 [node name="NavigationAgent" type="Spatial" parent="."]
 script = ExtResource( 4 )
 roadway_name = "PedestrianRoadway"
 
+[node name="CarNavigationAgent" type="Spatial" parent="."]
+script = ExtResource( 4 )
+roadway_name = "CarRoadway"
+
 [node name="WomanCharacter" parent="." instance=ExtResource( 2 )]
 transform = Transform( -1.1, 0, -9.61651e-08, 0, 1.1, 0, 9.61651e-08, 0, -1.1, 0, 0, 0 )
-
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource( 6 )
-_initial_state = "IdleState"
-
-[node name="IdleState" type="Node" parent="StateMachine"]
-script = ExtResource( 7 )
-animator_node_path = NodePath("../../WomanCharacter")
-_roadway_name = "PedestrianRoadway"
-_navigation_agent_node_path = NodePath("../../NavigationAgent")
-_interactable_node_path = NodePath("../../Interactable")
-_vision_area_node_path = NodePath("../../Vision")
-movement_controller_node_path = NodePath("../../MovementController")
-
-[node name="WalkState" type="Node" parent="StateMachine"]
-script = ExtResource( 8 )
-animator_node_path = NodePath("../../WomanCharacter")
-_roadway_name = "PedestrianRoadway"
-_navigation_agent_node_path = NodePath("../../NavigationAgent")
-_interactable_node_path = NodePath("../../Interactable")
-_vision_area_node_path = NodePath("../../Vision")
-movement_controller_node_path = NodePath("../../MovementController")
-
-[node name="DriveState" type="Node" parent="StateMachine"]
-script = ExtResource( 9 )
-animator_node_path = NodePath("../../WomanCharacter")
-_roadway_name = "CarRoadway"
-_navigation_agent_node_path = NodePath("../../NavigationAgent")
-_interactable_node_path = NodePath("../../Interactable")
-_vision_area_node_path = NodePath("../../Vision")
-
-[node name="CatchTaxiState" type="Node" parent="StateMachine"]
-script = ExtResource( 12 )
-animator_node_path = NodePath("../../WomanCharacter")
-_roadway_name = "PedestrianRoadway"
-_navigation_agent_node_path = NodePath("../../NavigationAgent")
-_interactable_node_path = NodePath("../../Interactable")
-_vision_area_node_path = NodePath("../../Vision")
-movement_controller_node_path = NodePath("../../MovementController")
 
 [node name="Interactable" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32627, -0.22608 )
 
 [node name="Vision" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.532, -6.375 )
+script = ExtResource( 12 )
+_blackboard_node_path = NodePath("../BTBehaviourTree/BTBlackboard")
 
 [node name="CollisionShape" type="CollisionShape" parent="Vision"]
 shape = SubResource( 2 )
+
+[node name="BTBehaviourTree" type="Node" parent="."]
+script = ExtResource( 13 )
+_tick_type = 1
+_actor_node_path = NodePath("..")
+_blackboard_node_path = NodePath("BTBlackboard")
+
+[node name="BTSelector" type="Node" parent="BTBehaviourTree"]
+script = ExtResource( 11 )
+
+[node name="BTSequence_Walk" type="Node" parent="BTBehaviourTree/BTSelector"]
+script = ExtResource( 14 )
+
+[node name="BTBlackboardCondition" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Walk"]
+script = ExtResource( 6 )
+_blackboard_key = "is_need_taxi"
+_notify_type = 1
+_action_type = 1
+
+[node name="BTBlackboardCondition2" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Walk"]
+script = ExtResource( 6 )
+_blackboard_key = "vehicle_actor"
+_action_type = 1
+
+[node name="SetRandomWaypointTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Walk"]
+script = ExtResource( 18 )
+_roadway_name = "PedestrianRoadway"
+
+[node name="BTMoveToTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Walk"]
+script = ExtResource( 17 )
+_blackboard_property_name = "target_waypoint"
+
+[node name="BTWaitTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Walk"]
+script = ExtResource( 8 )
+_time = 3.0
+
+[node name="BTSequence_Drive" type="Node" parent="BTBehaviourTree/BTSelector"]
+script = ExtResource( 14 )
+
+[node name="BTBlackboardCondition" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Drive"]
+script = ExtResource( 6 )
+_blackboard_key = "vehicle_actor"
+
+[node name="SetRandomWaypointTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Drive"]
+script = ExtResource( 18 )
+_roadway_name = "CarRoadway"
+
+[node name="BTMoveToTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Drive"]
+script = ExtResource( 17 )
+_blackboard_property_name = "target_waypoint"
+
+[node name="BTSequence_CatchTaxi" type="Node" parent="BTBehaviourTree/BTSelector"]
+script = ExtResource( 14 )
+
+[node name="BTBlackboardCondition" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_CatchTaxi"]
+script = ExtResource( 6 )
+_blackboard_key = "is_need_taxi"
+
+[node name="CatchTaxiTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_CatchTaxi"]
+script = ExtResource( 9 )
+
+[node name="BTBlackboard" type="Node" parent="BTBehaviourTree"]
+script = ExtResource( 15 )
+_property_names = [ "actor", "target_waypoint", "vehicle_actor", "is_need_taxi", "visible_taxi" ]
