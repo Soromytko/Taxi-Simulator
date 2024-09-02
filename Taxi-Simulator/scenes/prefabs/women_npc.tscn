@@ -33,6 +33,7 @@ movement_model_resource = ExtResource( 3 )
 
 [node name="NavigationAgent" type="Spatial" parent="."]
 script = ExtResource( 4 )
+roadway_name = "PedestrianRoadway"
 
 [node name="WomanCharacter" parent="." instance=ExtResource( 2 )]
 transform = Transform( -1.1, 0, -9.61651e-08, 0, 1.1, 0, 9.61651e-08, 0, -1.1, 0, 0, 0 )
@@ -44,7 +45,7 @@ _initial_state = "IdleState"
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )
 animator_node_path = NodePath("../../WomanCharacter")
-_roadway_node_path_str = "PedestrianRoadway"
+_roadway_name = "PedestrianRoadway"
 _navigation_agent_node_path = NodePath("../../NavigationAgent")
 _interactable_node_path = NodePath("../../Interactable")
 _vision_area_node_path = NodePath("../../Vision")
@@ -53,7 +54,7 @@ movement_controller_node_path = NodePath("../../MovementController")
 [node name="WalkState" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
 animator_node_path = NodePath("../../WomanCharacter")
-_roadway_node_path_str = "PedestrianRoadway"
+_roadway_name = "PedestrianRoadway"
 _navigation_agent_node_path = NodePath("../../NavigationAgent")
 _interactable_node_path = NodePath("../../Interactable")
 _vision_area_node_path = NodePath("../../Vision")
@@ -62,7 +63,7 @@ movement_controller_node_path = NodePath("../../MovementController")
 [node name="DriveState" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
 animator_node_path = NodePath("../../WomanCharacter")
-_roadway_node_path_str = "CarRoadway"
+_roadway_name = "CarRoadway"
 _navigation_agent_node_path = NodePath("../../NavigationAgent")
 _interactable_node_path = NodePath("../../Interactable")
 _vision_area_node_path = NodePath("../../Vision")
@@ -70,7 +71,7 @@ _vision_area_node_path = NodePath("../../Vision")
 [node name="CatchTaxiState" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
 animator_node_path = NodePath("../../WomanCharacter")
-_roadway_node_path_str = "PedestrianRoadway"
+_roadway_name = "PedestrianRoadway"
 _navigation_agent_node_path = NodePath("../../NavigationAgent")
 _interactable_node_path = NodePath("../../Interactable")
 _vision_area_node_path = NodePath("../../Vision")

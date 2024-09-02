@@ -2,6 +2,7 @@ tool
 extends Spatial
 class_name Roadway
 
+const GROUP_NAME : String = "Roadways"
 var _waypoints : Dictionary = {}
 onready var _is_ready : bool = true
 var _astar : AStar = null
@@ -27,11 +28,13 @@ func _enter_tree():
 	_astar = AStar.new()
 	_connect_signal("child_entered_tree")
 	_connect_signal("child_exiting_tree")
+	add_to_group(GROUP_NAME)
 
 
 func _exit_tree():
 	_disconnect_signal("child_entered_tree")
 	_disconnect_signal("child_exiting_tree")
+	remove_from_group(GROUP_NAME)
 
 
 func _on_child_entered_tree(node : Node):

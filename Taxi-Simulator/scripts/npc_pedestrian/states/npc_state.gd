@@ -6,7 +6,7 @@ class States:
 
 
 export var animator_node_path : NodePath
-export var _roadway_node_path_str : String
+export var _roadway_name : String
 export var _navigation_agent_node_path : NodePath
 export var _interactable_node_path : NodePath
 export var _vision_area_node_path : NodePath
@@ -17,7 +17,7 @@ onready var _vision_area : Area = get_node(_vision_area_node_path)
 
 
 func _init_navigation_agent():
-	var roadway : Roadway = get_tree().root.get_child(0).get_node_or_null(_roadway_node_path_str)
+	var roadway : Roadway = RWUtils.find_roadway(get_tree(), _roadway_name)
 	if _navigation_agent.roadway != roadway:
 		_navigation_agent.roadway = roadway
 
