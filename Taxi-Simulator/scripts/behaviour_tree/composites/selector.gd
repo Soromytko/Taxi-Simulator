@@ -14,3 +14,8 @@ func _get_behaviour_node() -> BTBehaviourNode:
 			result = _get_current_behaviour_node()
 	return result
 
+
+# Overridden
+func _init_tick_result() -> int:
+	return TickResult.SUCCESS
+

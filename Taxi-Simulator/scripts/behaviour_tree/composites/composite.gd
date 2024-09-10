@@ -3,7 +3,7 @@ class_name BTComposite
 
 onready var _behaviour_nodes : Array = _find_behaviour_nodes()
 onready var _behaviour_node_index : int = _init_behaviour_node_index()
-var _last_tick_result : int = TickResult.FAILURE
+onready var _last_tick_result : int = _init_tick_result()
 
 
 # Overridden
@@ -38,6 +38,10 @@ func _get_behaviour_node() -> BTBehaviourNode:
 
 func _init_behaviour_node_index() -> int:
 	 return 0 if _behaviour_nodes.size() > 0 else -1 
+
+
+func _init_tick_result() -> int:
+	 return TickResult.FAILURE
 
 
 func _get_current_behaviour_node() -> BTBehaviourNode:
