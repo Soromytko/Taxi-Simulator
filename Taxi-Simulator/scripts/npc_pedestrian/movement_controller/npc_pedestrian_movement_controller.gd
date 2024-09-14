@@ -45,5 +45,6 @@ func _physics_process(delta : float):
 		move_and_rotate(_movement_direction, delta)
 		_movement_direction = Vector3.ZERO
 	else:
+		brake(delta)
 		apply_velocity()
 
