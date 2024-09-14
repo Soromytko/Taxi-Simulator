@@ -11,15 +11,26 @@ func move_and_rotate(direction : Vector3, delta : float):
 	move_in_direction(_get_forward(), delta)
 
 
-func move_to(target : Vector3, _delta : float):
+func move_to(target : Vector3, _delta : float, use_navigation : bool = true):
 	_movement_direction = Vector3.ZERO
 	if _is_reached_target(target):
 		return true
+	if use_navigation:
+		_move_to_with_navigation(target)
+	else:
+		_move_to_without_navigation(target)
+	return false
+
+
+func _move_to_with_navigation(target : Vector3):
 	navigation_agent.target_position = target
 	var next_position := navigation_agent.get_next_path_position()
 	var direction := global_transform.origin.direction_to(next_position)
 	_movement_direction = direction
-	return false
+
+
+func _move_to_without_navigation(target : Vector3):
+	_movement_direction = global_transform.origin.direction_to(target)
 
 
 func _is_reached_target(target : Vector3):

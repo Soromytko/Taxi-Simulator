@@ -2,6 +2,7 @@ extends BTTask
 class_name BTMoveToTask
 
 export var _blackboard_property_name : String
+export var _use_navigation : bool = true
 const MOVE_TO_METHOD_NAME : String = "move_to"
 var _actor_property : BTBlackboardProperty
 var _target_property : BTBlackboardProperty
@@ -11,7 +12,7 @@ func on_tick(delta : float) -> int:
 	var actor = _actor_property.value
 	if actor.has_method(MOVE_TO_METHOD_NAME):
 		var target := _get_target(actor)
-		if actor.call(MOVE_TO_METHOD_NAME, target, delta):
+		if actor.call(MOVE_TO_METHOD_NAME, target, delta, _use_navigation):
 			return TickResult.SUCCESS
 		else:
 			return TickResult.RUNNING
