@@ -14,7 +14,7 @@ func get_navigation_agent() -> RWNavigationAgent:
 	return _navigation_agent
 
 
-func move_to(target : Vector3, delta : float) -> bool:
+func move_to(target : Vector3, delta : float, _use_navigation : bool = true) -> bool:
 	if _is_reached_target(target):
 		return true
 	_navigation_agent.target_position = target

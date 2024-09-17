@@ -38,7 +38,7 @@ func _update_collision_shape_data():
 
 
 # overridden
-func get_into_vehicle_instantly(vehicle : Vehicle, vehicle_seat_type : int):
+func get_into_vehicle_instantly(vehicle : Vehicle, seat_key : String):
 	$CollisionShape.disabled = true
 	$StateMachine/DriveState.vehicle = vehicle
 	$StateMachine.switch_state("DriveState")

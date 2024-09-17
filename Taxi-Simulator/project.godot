@@ -119,11 +119,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/car_door_interactable.gd"
 }, {
-"base": "Vehicle",
-"class": "CarNPC",
-"language": "GDScript",
-"path": "res://scripts/npcs/car_npc/car_npc.gd"
-}, {
 "base": "NPCSpawner",
 "class": "CarNPCSpawner",
 "language": "GDScript",
@@ -219,7 +214,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/base/vehicle.gd"
 }, {
-"base": "Reference",
+"base": "Position3D",
 "class": "VehicleSeat",
 "language": "GDScript",
 "path": "res://scripts/vehicle_seat.gd"
@@ -252,7 +247,6 @@ _global_script_class_icons={
 "BlendAnimatorProperty": "",
 "BooleanAnimatorProperty": "",
 "CarDoorInteractable": "",
-"CarNPC": "",
 "CarNPCSpawner": "",
 "GameCloser": "",
 "HumanMovementModel": "",

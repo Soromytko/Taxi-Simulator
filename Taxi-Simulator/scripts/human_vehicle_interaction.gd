@@ -1,24 +1,27 @@
 class_name HumanVehicleInteraction
 
 
-static func get_into_vehicle_instantly(vehicle : Vehicle, driver : RiderCharacter):
-	if vehicle.has_driver() || driver.has_vehicle():
+static func get_into_vehicle_instantly(vehicle : Vehicle, rider : RiderCharacter, seat_key : String = "driver"):
+	if vehicle.has_rider(seat_key) || rider.has_vehicle():
 		return
-	vehicle.set_driver(driver)
-	driver.get_parent().remove_child(driver)
-	vehicle.add_child(driver)
-	driver.visible = false
-	driver.global_transform.origin = vehicle.global_transform.origin
-	driver.rotation = Vector3(0, PI, 0)
-	driver.get_into_vehicle_instantly(vehicle, VehicleSeat.Type.LeftFrontDriver)
+	var seat : VehicleSeat = vehicle.seats[seat_key]
+	seat.rider = rider
+	rider.get_parent().remove_child(rider)
+	vehicle.seats[seat_key].add_child(rider)
+	rider.visible = false
+	rider.global_transform.origin = seat.global_transform.origin
+	rider.rotation = Vector3(0, PI, 0)
+	rider.get_into_vehicle_instantly(vehicle, seat_key)
 
 
-static func get_out_of_vehicle_instantly(vehicle : Vehicle, driver : RiderCharacter):
-	vehicle.remove_driver()
-	var scene_tree : SceneTree = driver.get_tree()
-	var driver_position : Vector3 = driver.global_transform.origin + vehicle.global_transform.basis.x * 2
-	driver.get_out_of_vehicle_instantly()
-	driver.get_parent().remove_child(driver)
-	scene_tree.root.add_child(driver)
-	driver.global_transform.origin = driver_position
-	driver.visible = true
+static func get_out_of_vehicle_instantly(vehicle : Vehicle, rider : RiderCharacter):
+	var seat_key : String = rider.get_parent().key
+	vehicle.remove_rider(seat_key)
+	var scene_tree : SceneTree = rider.get_tree()
+	var rider_position : Vector3 = rider.global_transform.origin + vehicle.global_transform.basis.x * 2
+	rider_position.y = vehicle.global_transform.origin.y
+	rider.get_out_of_vehicle_instantly()
+	rider.get_parent().remove_child(rider)
+	scene_tree.root.add_child(rider)
+	rider.global_transform.origin = rider_position
+	rider.visible = true

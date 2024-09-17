@@ -9,10 +9,21 @@ onready var _walk_anim_transition := BooleanAnimatorProperty.new(_animator, "wal
 var _blackboard_vehicle_property : BTBlackboardProperty
 
 
-func move_to(target : Vector3, delta : float) -> bool:
+func move_to(target : Vector3, delta : float, use_navigation : bool = true) -> bool:
+	if has_vehicle() && get_is_driver():
+		return $DriveMovementController.move_to(target, delta, use_navigation)
+	return $MovementController.move_to(target, delta, use_navigation)
+
+
+func rotate_to(target : Vector3, delta : float, best_angle : float = 10.0) -> bool:
 	if has_vehicle():
-		return $DriveMovementController.move_to(target, delta)
-	return $MovementController.move_to(target, delta)
+		push_warning("The actor is in the vehicle %s" % get_vehicle())
+		return false
+	var normal_target := Vector3(target.x, global_transform.origin.y, target.z)
+	var direction := global_transform.origin.direction_to(normal_target)
+	$MovementController.rotate_to_direction(direction, delta)
+	var angle := global_transform.basis.z.angle_to(-direction)
+	return angle <= best_angle
 
 
 # Overridden
@@ -21,10 +32,12 @@ func get_vehicle() -> Vehicle:
 
 
 # overridden
-func get_into_vehicle_instantly(vehicle : Vehicle, _vehicle_seat_type : int):
+func get_into_vehicle_instantly(vehicle : Vehicle, seat_key : String):
 	$CollisionShape.disabled = true
 	$NavigationAgent.roadway_name = "CarRoadway"
 	$DriveMovementController.vehicle = vehicle
+	$MovementController.set_physics_process(false)
+	$BTBehaviourTree.active = get_is_driver()
 	_blackboard_vehicle_property.value = vehicle
 
 
@@ -33,6 +46,8 @@ func get_out_of_vehicle_instantly():
 	$CollisionShape.disabled = true
 	$NavigationAgent.roadway_name = "PedestrianRoadway"
 	$DriveMovementController.vehicle = null
+	$MovementController.set_physics_process(true)
+	$BTBehaviourTree.active = true
 	_blackboard_vehicle_property.value = null
 
 

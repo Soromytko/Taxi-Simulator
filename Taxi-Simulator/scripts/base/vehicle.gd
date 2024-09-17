@@ -4,18 +4,52 @@ class_name Vehicle
 signal is_braking_changed(value)
 
 var speed : float setget , get_speed
+var seats : Dictionary setget , get_seats
 
 export var engine_power : float = 5.0
 export var brake_power : float = 3.0
 export var steering_limit : float = 0.5
 
-var _riders : Dictionary = {}
+var _seats : Dictionary
 var is_braking : bool setget _set_is_braking, get_is_braking
 var _is_braking : bool = false
 
 
 func get_speed() -> float:
 	return linear_velocity.length()
+
+
+func get_seats() -> Dictionary:
+	return _seats
+
+
+func get_rider(seat_key : String) -> Spatial:
+	if _seats.has(seat_key):
+		var seat : VehicleSeat = _seats[seat_key]
+		return seat.rider
+	return null
+
+
+func has_rider(seat_key : String) -> bool:
+	return get_rider(seat_key) != null
+
+
+func has_driver() -> bool:
+	for key in _seats:
+		var seat : VehicleSeat = _seats[key]
+		if seat.rider != null && seat.is_driver_seat:
+			return true
+	return false
+
+
+func set_rider(rider : Spatial, seat_key : String):
+	if _seats.has(seat_key):
+		var seat : VehicleSeat = _seats[seat_key]
+		seat.rider = rider
+
+
+func remove_rider(seat_key : String):
+	set_rider(null, seat_key)
 
 
 # overridden
@@ -32,20 +66,6 @@ func _set_is_braking(value : bool):
 
 func get_is_braking() -> bool:
 	return _is_braking
-
-
-func set_driver(driver : Spatial):
-	_riders[VehicleSeat.Type.LeftFrontDriver] = driver
-
-
-func remove_driver():
-	if !_riders.erase(VehicleSeat.Type.LeftFrontDriver):
-		var arg : String = VehicleSeat.Type.keys()[VehicleSeat.Type.LeftFrontDriver]
-		push_warning("The driver is missing: %s" % arg)
-
-
-func has_driver() -> bool:
-	return _riders.has(VehicleSeat.Type.LeftFrontDriver)
 
 
 #Range from 0 to 1
@@ -69,3 +89,16 @@ func depress_brake():
 #Range from -1 to 1
 func set_steering_progress(progress : float):
 	set_steering(steering_limit * clamp(progress, -1, 1))
+
+
+func _enter_tree():
+	for child in get_children():
+		if child is VehicleSeat:
+			var seat : VehicleSeat = child
+			_seats[seat.key] = seat
+
+
+func _exit_tree():
+	_seats.clear()
+
+

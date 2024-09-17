@@ -11,7 +11,15 @@ func get_vehicle() -> Vehicle:
 	return null
 
 
-func get_into_vehicle_instantly(_vehicle : Vehicle, _vehicle_seat_type : int):
+func get_is_driver() -> bool:
+	var maybe_seat = get_parent()
+	if maybe_seat is VehicleSeat:
+		var seat : VehicleSeat = maybe_seat
+		return seat.is_driver_seat
+	return false
+
+
+func get_into_vehicle_instantly(_vehicle : Vehicle, _seat_key : String):
 	push_warning("Override me!")
 
 
