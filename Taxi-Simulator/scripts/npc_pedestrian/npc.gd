@@ -87,5 +87,6 @@ func _get_horizontal_speed(velocity : Vector3) -> float:
 func _catch_taxi_if_random():
 	var rng := TimedRNG.new()
 	if rng.randi_range(1, 10) <= 3:
+		$LocationMarkerSprite.visible = true
 		$BTBehaviourTree/BTBlackboard.get_property("is_need_taxi").value = true
 

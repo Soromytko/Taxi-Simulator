@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/npc_pedestrian/npc.gd" type="Script" id=1]
 [ext_resource path="res://scenes/prefabs/woman_character.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://scripts/npc_pedestrian/tasks/get_into_taxi_task.gd" type="Script" id=16]
 [ext_resource path="res://scripts/behaviour_tree/move_to.gd" type="Script" id=17]
 [ext_resource path="res://scripts/npc_pedestrian/tasks/set_random_waypoint_bt_task.gd" type="Script" id=18]
+[ext_resource path="res://resources/textures/taxi_location_marker.png" type="Texture" id=19]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.301
@@ -134,3 +135,10 @@ script = ExtResource( 16 )
 [node name="BTBlackboard" type="Node" parent="BTBehaviourTree"]
 script = ExtResource( 15 )
 _property_names = [ "actor", "target_waypoint", "vehicle_actor", "is_need_taxi", "visible_taxi", "seat_type", "seat_approach" ]
+
+[node name="LocationMarkerSprite" type="Sprite3D" parent="."]
+transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 2.44992, 0 )
+visible = false
+billboard = 1
+double_sided = false
+texture = ExtResource( 19 )
