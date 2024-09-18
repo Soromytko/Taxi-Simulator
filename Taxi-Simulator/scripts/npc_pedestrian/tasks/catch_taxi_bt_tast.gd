@@ -25,8 +25,7 @@ func on_tick(delta : float) -> int:
 				if seat != null:
 					_seat_approach_property.value = seat.approach
 					return TickResult.SUCCESS
-				else:
-					push_warning("The nearest seat has not been found! %s" % [taxi])
+			return TickResult.RUNNING
 	return TickResult.FAILURE
 
 
@@ -53,14 +52,14 @@ func _rotate_actor(actor : Spatial, target : Vector3, delta : float):
 	actor.rotation.z = 0
 
 
-func _get_nearest_available_seat(actor : Spatial, vehicle : Vehicle) -> VehicleSeat:
-	if !vehicle.has_driver():
+func _get_nearest_available_seat(actor : Spatial, taxi : TaxiCar) -> VehicleSeat:
+	if !taxi.has_driver() || taxi.has_passenger():
 		return null
 	var result : VehicleSeat = null
 	# TODO: Set a fairly large value
 	var dist : float = 100000.0
-	for key in vehicle.seats:
-		var seat : VehicleSeat = vehicle.seats[key]
+	for key in taxi.seats:
+		var seat : VehicleSeat = taxi.seats[key]
 		if seat.rider:
 			continue
 		if !result:
