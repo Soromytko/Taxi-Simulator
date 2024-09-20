@@ -17,7 +17,7 @@ func on_tick(delta : float) -> int:
 		var seat : VehicleSeat = seat_approach.get_parent()
 		var target := seat.global_transform.origin
 		if actor.rotate_to(target, delta, deg2rad(10.0)):
-			HumanVehicleInteraction.get_into_vehicle_instantly(taxi, actor, seat.key)
+			CharacterVehicleInteraction.get_into_vehicle_instantly(taxi, actor, seat.key)
 			return TickResult.SUCCESS
 	else:
 		return TickResult.FAILURE

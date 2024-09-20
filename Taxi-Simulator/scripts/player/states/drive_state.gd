@@ -8,12 +8,12 @@ var _steering_speed : float = 5.0
 
 
 func _on_enter():
-	HumanVehicleInteraction.get_into_vehicle_instantly(vehicle, _player)
+	CharacterVehicleInteraction.get_into_vehicle_instantly(vehicle, _player)
 
 
 func _on_physics_update(delta : float):
 	if PlayerInput.get_is_action():
-		HumanVehicleInteraction.get_out_of_vehicle_instantly(vehicle, _player)
+		CharacterVehicleInteraction.get_out_of_vehicle_instantly(vehicle, _player)
 		return
 	
 	if PlayerInput.get_is_car_forward():

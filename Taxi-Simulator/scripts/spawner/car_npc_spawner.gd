@@ -9,7 +9,7 @@ func _on_spawn_npc_deferred(npc : PhysicsBody, waypoint : Waypoint):
 	if npc is Vehicle:
 		var car : Vehicle = npc
 		var driver := _spawn_driver()
-		HumanVehicleInteraction.get_into_vehicle_instantly(car, driver)
+		CharacterVehicleInteraction.get_into_vehicle_instantly(car, driver)
 
 
 func _spawn_driver() -> NPC:

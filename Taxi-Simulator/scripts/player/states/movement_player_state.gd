@@ -1,12 +1,10 @@
 extends "./player_state.gd"
 
-const class_movement_controller : Script = preload("../player_movement_controller.gd")
-
 export(NodePath) var movement_controller_node_path
 export(Resource) var movement_model_resource
 
-onready var movement_controller : class_movement_controller = get_node(movement_controller_node_path) 
-onready var movement_model : HumanMovementModel = movement_model_resource
+onready var movement_controller : PlayerMovementController = get_node(movement_controller_node_path) 
+onready var movement_model : CharacterMovementModel = movement_model_resource
 onready var _idle_walk_blend_anim := BlendAnimatorProperty.new(_animator, "idle_walk")
 onready var _falling_blend_anim := BlendAnimatorProperty.new(_animator, "falling")
 

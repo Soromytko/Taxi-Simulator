@@ -1,4 +1,4 @@
-class_name HumanVehicleInteraction
+class_name CharacterVehicleInteraction
 
 
 static func get_into_vehicle_instantly(vehicle : Vehicle, rider : RiderCharacter, seat_key : String = "driver"):

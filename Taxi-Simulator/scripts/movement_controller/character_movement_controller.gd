@@ -1,7 +1,8 @@
 extends "res://addons/movement_controller/scripts/movement_controller.gd"
+class_name CharacterMovementController
 
 export(Resource) var movement_model_resource : Resource
-var movement_model : HumanMovementModel setget set_movement_model, get_movement_model
+var movement_model : CharacterMovementModel setget set_movement_model, get_movement_model
 var _max_movement_speed_modifier : float = 1.0
 var _rotation_progress : float
 
@@ -10,11 +11,11 @@ func _ready():
 	movement_model = movement_model_resource
 
 
-func set_movement_model(value : HumanMovementModel):
+func set_movement_model(value : CharacterMovementModel):
 	movement_model = value
 
 
-func get_movement_model() -> HumanMovementModel:
+func get_movement_model() -> CharacterMovementModel:
 	return movement_model
 
 

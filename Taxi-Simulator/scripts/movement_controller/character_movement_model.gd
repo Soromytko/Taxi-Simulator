@@ -1,5 +1,5 @@
 extends Resource
-class_name HumanMovementModel
+class_name CharacterMovementModel
 
 export var max_horizontal_speed : float = 5.0
 export var max_vertical_speed : float = 20.0

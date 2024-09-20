@@ -1,23 +1,23 @@
 [gd_scene load_steps=22 format=2]
 
-[ext_resource path="res://scripts/npc_pedestrian/npc.gd" type="Script" id=1]
+[ext_resource path="res://scripts/npc/npc.gd" type="Script" id=1]
 [ext_resource path="res://scenes/prefabs/woman_character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/npc_pedestrian_movement_model.tres" type="Resource" id=3]
 [ext_resource path="res://addons/roadway/scripts/navigation_agent.gd" type="Script" id=4]
-[ext_resource path="res://scripts/npc_pedestrian/movement_controller/npc_pedestrian_movement_controller.gd" type="Script" id=5]
+[ext_resource path="res://scripts/npc/movement_controller/npc_pedestrian_movement_controller.gd" type="Script" id=5]
 [ext_resource path="res://scripts/behaviour_tree/decorators/blackboard_condition.gd" type="Script" id=6]
-[ext_resource path="res://scripts/npcs/DriveMovementController.gd" type="Script" id=7]
+[ext_resource path="res://scripts/npc/movement_controller/npc_drive_movement_controller.gd" type="Script" id=7]
 [ext_resource path="res://scripts/behaviour_tree/tasks/wait_task.gd" type="Script" id=8]
-[ext_resource path="res://scripts/npc_pedestrian/tasks/catch_taxi_bt_tast.gd" type="Script" id=9]
+[ext_resource path="res://scripts/npc/tasks/catch_taxi_bt_tast.gd" type="Script" id=9]
 [ext_resource path="res://scenes/prefabs/interaction/interactable.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/behaviour_tree/composites/selector.gd" type="Script" id=11]
-[ext_resource path="res://scripts/npc_pedestrian/vision.gd" type="Script" id=12]
+[ext_resource path="res://scripts/npc/vision.gd" type="Script" id=12]
 [ext_resource path="res://scripts/behaviour_tree/behaviour_tree.gd" type="Script" id=13]
 [ext_resource path="res://scripts/behaviour_tree/composites/sequence.gd" type="Script" id=14]
 [ext_resource path="res://scripts/behaviour_tree/blackboard.gd" type="Script" id=15]
-[ext_resource path="res://scripts/npc_pedestrian/tasks/get_into_taxi_task.gd" type="Script" id=16]
+[ext_resource path="res://scripts/npc/tasks/get_into_taxi_bt_task.gd" type="Script" id=16]
 [ext_resource path="res://scripts/behaviour_tree/move_to.gd" type="Script" id=17]
-[ext_resource path="res://scripts/npc_pedestrian/tasks/set_random_waypoint_bt_task.gd" type="Script" id=18]
+[ext_resource path="res://scripts/npc/tasks/set_random_waypoint_bt_task.gd" type="Script" id=18]
 [ext_resource path="res://resources/textures/taxi_location_marker.png" type="Texture" id=19]
 
 [sub_resource type="CapsuleShape" id=1]
@@ -129,7 +129,7 @@ script = ExtResource( 17 )
 _blackboard_property_name = "seat_approach"
 _use_navigation = false
 
-[node name="get_into_taxi_task" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_CatchTaxi"]
+[node name="GetIntoTaxiTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_CatchTaxi"]
 script = ExtResource( 16 )
 
 [node name="BTBlackboard" type="Node" parent="BTBehaviourTree"]

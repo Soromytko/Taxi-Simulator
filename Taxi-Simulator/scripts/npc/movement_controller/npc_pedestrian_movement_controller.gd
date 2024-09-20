@@ -1,4 +1,4 @@
-extends "../../human_movement_controller.gd"
+extends CharacterMovementController
 class_name NPCMovementController
 
 var navigation_agent : RWNavigationAgent
