@@ -6,7 +6,7 @@ enum TickType {
 	PHYSICS_PROCESS,
 }
 
-export var active : bool setget set_active, get_active
+export var active : bool = true setget set_active, get_active
 export(int, "Process", "Physics process") var _tick_type : int
 export var _actor_node_path : NodePath
 export var _blackboard_node_path : NodePath
@@ -28,6 +28,9 @@ func get_active() -> bool:
 
 func _ready():
 	_init_blackboard()
+	# According to the documentation,
+	# update the activity only after it is ready.
+	_update_activity()
 
 
 func _update_activity():
