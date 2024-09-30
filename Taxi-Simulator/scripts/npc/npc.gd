@@ -12,6 +12,7 @@ var _target_waypoint_blackboard_property : BTBlackboardProperty
 var _is_taxi_required_blackboard_property : BTBlackboardProperty
 var _vehicle_blackboard_property : BTBlackboardProperty
 var _is_taxi_required : bool
+var _debug_mesh_instance : MeshInstance
 
 
 func get_is_taxi_required() -> bool:
@@ -57,16 +58,14 @@ func get_into_vehicle_instantly(vehicle : Vehicle, seat_key : String):
 	$NavigationAgent.roadway_name = "CarRoadway"
 	$DriveMovementController.vehicle = vehicle
 	$MovementController.set_physics_process(false)
-	$BTBehaviourTree.active = get_is_driver()
 	_vehicle_blackboard_property.value = vehicle
 	if vehicle is TaxiCar:
-		$BTBehaviourTree.active = true
-		var mesh_instance := MeshInstance.new()
-		get_tree().root.get_child(0).add_child(mesh_instance)
+		_debug_mesh_instance = MeshInstance.new()
+		get_tree().root.get_child(0).add_child(_debug_mesh_instance)
 		var cubeMesh := CubeMesh.new()
 		cubeMesh.size = Vector3(1, 100, 1)
-		mesh_instance.mesh = cubeMesh
-		mesh_instance.global_transform.origin = get_destination()
+		_debug_mesh_instance.mesh = cubeMesh
+		_debug_mesh_instance.global_transform.origin = get_destination()
 
 
 # overridden
@@ -75,7 +74,6 @@ func get_out_of_vehicle_instantly():
 	$NavigationAgent.roadway_name = "PedestrianRoadway"
 	$DriveMovementController.vehicle = null
 	$MovementController.set_physics_process(true)
-	$BTBehaviourTree.active = true
 	_vehicle_blackboard_property.value = null
 	set_is_taxi_required(false)
 
@@ -90,6 +88,11 @@ func _ready():
 	$MovementController.navigation_agent = $NavigationAgent
 	$DriveMovementController.navigation_agent = $NavigationAgent
 	_catch_taxi_if_random()
+
+
+func _on_arrived():
+	BankOperations.credit_funds(get_tree(), "Bank", "BankClient", 10)
+	_debug_mesh_instance.queue_free()
 
 
 func _enter_tree():

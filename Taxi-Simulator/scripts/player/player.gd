@@ -49,3 +49,11 @@ func get_out_of_vehicle_instantly():
 	$CollisionShape.disabled = false
 	$StateMachine/DriveState.vehicle = null
 	$StateMachine.switch_state("IdleState")
+
+
+func _ready():
+	$BankClient.connect("funds_changed", self, "_on_funds_changed")
+
+
+func _on_funds_changed(value : float):
+	$Label.text = str(value) + " $"

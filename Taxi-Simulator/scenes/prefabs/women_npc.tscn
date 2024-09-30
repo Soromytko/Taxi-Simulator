@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/npc/npc.gd" type="Script" id=1]
 [ext_resource path="res://scenes/prefabs/woman_character.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://scripts/npc/tasks/ride_in_taxi_bt_task.gd" type="Script" id=20]
 [ext_resource path="res://scripts/npc/tasks/get_out_taxi_bt_task.gd" type="Script" id=21]
 [ext_resource path="res://scripts/behaviour_tree/tasks/print_message_task.gd" type="Script" id=22]
+[ext_resource path="res://scripts/behaviour_tree/tasks/call_actor_method_task.gd" type="Script" id=23]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.301
@@ -111,6 +112,10 @@ script = ExtResource( 16 )
 
 [node name="RideInTaxiTask" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSequence"]
 script = ExtResource( 20 )
+
+[node name="BTCallActorMethodTask" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSequence"]
+script = ExtResource( 23 )
+_method_name = "_on_arrived"
 
 [node name="GetOutTaxiTask" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSequence"]
 script = ExtResource( 21 )
