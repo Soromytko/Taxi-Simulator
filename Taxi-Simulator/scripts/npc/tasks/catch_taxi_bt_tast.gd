@@ -15,7 +15,9 @@ var _seat_approach_property : BTBlackboardProperty
 func on_tick(delta : float) -> int:
 	var actor : Spatial = _actor_property.value
 	var taxi : TaxiCar = _taxi_property.value
-	if actor && taxi:
+	if !actor:
+		return TickResult.FAILURE
+	if taxi:
 		_rotate_actor(actor, taxi.global_transform.origin, delta)
 		var taxi_position := taxi.global_transform.origin
 		var actor_position := actor.global_transform.origin
@@ -25,8 +27,7 @@ func on_tick(delta : float) -> int:
 				if seat != null:
 					_seat_approach_property.value = seat.approach
 					return TickResult.SUCCESS
-			return TickResult.RUNNING
-	return TickResult.FAILURE
+	return TickResult.RUNNING
 
 
 # Overridden

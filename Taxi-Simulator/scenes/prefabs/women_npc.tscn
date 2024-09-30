@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scripts/npc/npc.gd" type="Script" id=1]
 [ext_resource path="res://scenes/prefabs/woman_character.tscn" type="PackedScene" id=2]
@@ -19,6 +19,9 @@
 [ext_resource path="res://scripts/behaviour_tree/move_to.gd" type="Script" id=17]
 [ext_resource path="res://scripts/npc/tasks/set_random_waypoint_bt_task.gd" type="Script" id=18]
 [ext_resource path="res://resources/textures/taxi_location_marker.png" type="Texture" id=19]
+[ext_resource path="res://scripts/npc/tasks/ride_in_taxi_bt_task.gd" type="Script" id=20]
+[ext_resource path="res://scripts/npc/tasks/get_out_taxi_bt_task.gd" type="Script" id=21]
+[ext_resource path="res://scripts/behaviour_tree/tasks/print_message_task.gd" type="Script" id=22]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.301
@@ -70,71 +73,66 @@ _tick_type = 1
 _actor_node_path = NodePath("..")
 _blackboard_node_path = NodePath("BTBlackboard")
 
-[node name="BTSelector" type="Node" parent="BTBehaviourTree"]
-script = ExtResource( 11 )
-
-[node name="BTSequence_Walk" type="Node" parent="BTBehaviourTree/BTSelector"]
+[node name="BTSequence" type="Node" parent="BTBehaviourTree"]
 script = ExtResource( 14 )
 
-[node name="BTBlackboardCondition" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Walk"]
-script = ExtResource( 6 )
-_blackboard_key = "is_need_taxi"
-_notify_type = 1
-_action_type = 1
-
-[node name="BTBlackboardCondition2" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Walk"]
-script = ExtResource( 6 )
-_blackboard_key = "vehicle_actor"
-_action_type = 1
-
-[node name="SetRandomWaypointTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Walk"]
+[node name="SetRandomWaypointTask" type="Node" parent="BTBehaviourTree/BTSequence"]
 script = ExtResource( 18 )
 _roadway_name = "PedestrianRoadway"
 
-[node name="BTMoveToTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Walk"]
+[node name="BTSelector" type="Node" parent="BTBehaviourTree/BTSequence"]
+script = ExtResource( 11 )
+
+[node name="BTSelector" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector"]
+script = ExtResource( 11 )
+
+[node name="BTBlackboardCondition" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSelector"]
+script = ExtResource( 6 )
+_blackboard_key = "is_taxi_required"
+_action_type = 1
+
+[node name="BTMoveToTask" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSelector"]
 script = ExtResource( 17 )
 _blackboard_property_name = "target_waypoint"
 
-[node name="BTWaitTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Walk"]
-script = ExtResource( 8 )
-_time = 3.0
-
-[node name="BTSequence_Drive" type="Node" parent="BTBehaviourTree/BTSelector"]
+[node name="BTSequence" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector"]
 script = ExtResource( 14 )
 
-[node name="BTBlackboardCondition" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Drive"]
-script = ExtResource( 6 )
-_blackboard_key = "vehicle_actor"
-
-[node name="SetRandomWaypointTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Drive"]
-script = ExtResource( 18 )
-_roadway_name = "CarRoadway"
-
-[node name="BTMoveToTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_Drive"]
-script = ExtResource( 17 )
-_blackboard_property_name = "target_waypoint"
-
-[node name="BTSequence_CatchTaxi" type="Node" parent="BTBehaviourTree/BTSelector"]
-script = ExtResource( 14 )
-
-[node name="BTBlackboardCondition" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_CatchTaxi"]
-script = ExtResource( 6 )
-_blackboard_key = "is_need_taxi"
-
-[node name="CatchTaxiTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_CatchTaxi"]
+[node name="CatchTaxiTask" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSequence"]
 script = ExtResource( 9 )
 
-[node name="BTMoveToTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_CatchTaxi"]
+[node name="BTMoveToTask" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSequence"]
 script = ExtResource( 17 )
 _blackboard_property_name = "seat_approach"
 _use_navigation = false
 
-[node name="GetIntoTaxiTask" type="Node" parent="BTBehaviourTree/BTSelector/BTSequence_CatchTaxi"]
+[node name="GetIntoTaxiTask" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSequence"]
 script = ExtResource( 16 )
+
+[node name="RideInTaxiTask" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSequence"]
+script = ExtResource( 20 )
+
+[node name="GetOutTaxiTask" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSequence"]
+script = ExtResource( 21 )
+
+[node name="BTPrintMessageTask" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSequence"]
+script = ExtResource( 22 )
+_message = "I am arrived!"
+
+[node name="BTWaitTask" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSequence"]
+script = ExtResource( 8 )
+
+[node name="BTMoveToTask2" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSequence"]
+script = ExtResource( 17 )
+_blackboard_property_name = "target_waypoint"
+
+[node name="BTWaitTask2" type="Node" parent="BTBehaviourTree/BTSequence/BTSelector/BTSequence"]
+script = ExtResource( 8 )
+_time = 1000.0
 
 [node name="BTBlackboard" type="Node" parent="BTBehaviourTree"]
 script = ExtResource( 15 )
-_property_names = [ "actor", "target_waypoint", "vehicle_actor", "is_need_taxi", "visible_taxi", "seat_type", "seat_approach" ]
+_property_names = [ "actor", "target_waypoint", "vehicle_actor", "is_taxi_required", "visible_taxi", "seat_type", "seat_approach" ]
 
 [node name="LocationMarkerSprite" type="Sprite3D" parent="."]
 transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 2.44992, 0 )

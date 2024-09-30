@@ -3,10 +3,30 @@ class_name NPC
 
 const MIN_SPEED_APPROX : float = 0.001
 
+var is_taxi_required : bool setget , get_is_taxi_required
+#var destination : Vector3 setget , get_destination
 onready var _animator : Animator = $WomanCharacter
 onready var _idle_anim_transition := BooleanAnimatorProperty.new(_animator, "idle")
 onready var _walk_anim_transition := BooleanAnimatorProperty.new(_animator, "walk")
 var _blackboard_vehicle_property : BTBlackboardProperty
+var _is_taxi_required : bool
+
+
+func get_is_taxi_required() -> bool:
+	return _is_taxi_required
+
+
+func set_is_taxi_required(value : bool):
+	if _is_taxi_required != value:
+		_is_taxi_required = value
+		$LocationMarkerSprite.visible = value
+		var v = true if value else null
+		$BTBehaviourTree/BTBlackboard.get_property("is_taxi_required").value = v
+
+
+func get_destination() -> Vector3:
+	var property = $BTBehaviourTree/BTBlackboard.get_property("target_waypoint")
+	return property.value.global_transform.origin
 
 
 func move_to(target : Vector3, delta : float, use_navigation : bool = true) -> bool:
@@ -39,16 +59,30 @@ func get_into_vehicle_instantly(vehicle : Vehicle, seat_key : String):
 	$MovementController.set_physics_process(false)
 	$BTBehaviourTree.active = get_is_driver()
 	_blackboard_vehicle_property.value = vehicle
+	if vehicle is TaxiCar:
+		$BTBehaviourTree.active = true
+		var mesh_instance := MeshInstance.new()
+		get_tree().root.get_child(0).add_child(mesh_instance)
+		var cubeMesh := CubeMesh.new()
+		cubeMesh.size = Vector3(1, 100, 1)
+		mesh_instance.mesh = cubeMesh
+		mesh_instance.global_transform.origin = get_destination()
 
 
 # overridden
 func get_out_of_vehicle_instantly():
-	$CollisionShape.disabled = true
+	$CollisionShape.disabled = false
 	$NavigationAgent.roadway_name = "PedestrianRoadway"
 	$DriveMovementController.vehicle = null
 	$MovementController.set_physics_process(true)
 	$BTBehaviourTree.active = true
 	_blackboard_vehicle_property.value = null
+	
+	set_is_taxi_required(false)
+	return
+	_is_taxi_required = false
+	$LocationMarkerSprite.visible = false
+	$BTBehaviourTree/BTBlackboard.get_property("is_taxi_required").value = null
 
 
 func _ready():
@@ -87,6 +121,5 @@ func _get_horizontal_speed(velocity : Vector3) -> float:
 func _catch_taxi_if_random():
 	var rng := TimedRNG.new()
 	if rng.randi_range(1, 10) <= 3:
-		$LocationMarkerSprite.visible = true
-		$BTBehaviourTree/BTBlackboard.get_property("is_need_taxi").value = true
+		set_is_taxi_required(true)
 

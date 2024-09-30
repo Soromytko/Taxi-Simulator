@@ -4,6 +4,8 @@ class_name VehicleSeat
 
 const APPROACH_NAME = "Approach"
 
+signal rider_changed(value)
+
 var rider : Spatial setget set_rider, get_rider
 var approach : Position3D setget , get_approach
 export var is_driver_seat : bool setget set_is_driver_seat, get_is_driver_seat
@@ -25,7 +27,9 @@ func get_is_driver_seat() -> bool:
 
 
 func set_rider(value : Spatial):
-	_rider = value
+	if _rider != value:
+		_rider = value
+		emit_signal("rider_changed", value)
 
 
 func get_rider() -> Spatial:
