@@ -8,7 +8,9 @@ var is_taxi_required : bool setget , get_is_taxi_required
 onready var _animator : Animator = $WomanCharacter
 onready var _idle_anim_transition := BooleanAnimatorProperty.new(_animator, "idle")
 onready var _walk_anim_transition := BooleanAnimatorProperty.new(_animator, "walk")
-var _blackboard_vehicle_property : BTBlackboardProperty
+var _target_waypoint_blackboard_property : BTBlackboardProperty
+var _is_taxi_required_blackboard_property : BTBlackboardProperty
+var _vehicle_blackboard_property : BTBlackboardProperty
 var _is_taxi_required : bool
 
 
@@ -19,14 +21,12 @@ func get_is_taxi_required() -> bool:
 func set_is_taxi_required(value : bool):
 	if _is_taxi_required != value:
 		_is_taxi_required = value
-		$LocationMarkerSprite.visible = value
-		var v = true if value else null
-		$BTBehaviourTree/BTBlackboard.get_property("is_taxi_required").value = v
+		var property_value = true if value else null
+		_is_taxi_required_blackboard_property.value = property_value
 
 
 func get_destination() -> Vector3:
-	var property = $BTBehaviourTree/BTBlackboard.get_property("target_waypoint")
-	return property.value.global_transform.origin
+	return _target_waypoint_blackboard_property.value.global_transform.origin
 
 
 func move_to(target : Vector3, delta : float, use_navigation : bool = true) -> bool:
@@ -58,7 +58,7 @@ func get_into_vehicle_instantly(vehicle : Vehicle, seat_key : String):
 	$DriveMovementController.vehicle = vehicle
 	$MovementController.set_physics_process(false)
 	$BTBehaviourTree.active = get_is_driver()
-	_blackboard_vehicle_property.value = vehicle
+	_vehicle_blackboard_property.value = vehicle
 	if vehicle is TaxiCar:
 		$BTBehaviourTree.active = true
 		var mesh_instance := MeshInstance.new()
@@ -76,22 +76,20 @@ func get_out_of_vehicle_instantly():
 	$DriveMovementController.vehicle = null
 	$MovementController.set_physics_process(true)
 	$BTBehaviourTree.active = true
-	_blackboard_vehicle_property.value = null
-	
+	_vehicle_blackboard_property.value = null
 	set_is_taxi_required(false)
-	return
-	_is_taxi_required = false
-	$LocationMarkerSprite.visible = false
-	$BTBehaviourTree/BTBlackboard.get_property("is_taxi_required").value = null
 
 
 func _ready():
 	_animator.start_playback("idle-loop")
-	_catch_taxi_if_random()
-	_blackboard_vehicle_property = $BTBehaviourTree/BTBlackboard.get_property("vehicle_actor")
+	_target_waypoint_blackboard_property = $BTBehaviourTree/BTBlackboard.get_property("target_waypoint")
+	_is_taxi_required_blackboard_property = $BTBehaviourTree/BTBlackboard.get_property("is_taxi_required")
+	_vehicle_blackboard_property = $BTBehaviourTree/BTBlackboard.get_property("vehicle_actor")
+	_is_taxi_required_blackboard_property.connect("value_changed", self, "_is_taxi_required_blackboard_property_changed")
 	$MovementController.collision_shape = $CollisionShape
 	$MovementController.navigation_agent = $NavigationAgent
 	$DriveMovementController.navigation_agent = $NavigationAgent
+	_catch_taxi_if_random()
 
 
 func _enter_tree():
@@ -122,4 +120,10 @@ func _catch_taxi_if_random():
 	var rng := TimedRNG.new()
 	if rng.randi_range(1, 10) <= 3:
 		set_is_taxi_required(true)
+
+
+func _is_taxi_required_blackboard_property_changed(value):
+	var bool_value : bool = true if value else false
+	_is_taxi_required = bool_value
+	$LocationMarkerSprite.visible = bool_value
 
