@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/behaviour_tree/blackboard_property.gd"
 }, {
+"base": "BTTask",
+"class": "BTCallActorMethodTask",
+"language": "GDScript",
+"path": "res://scripts/behaviour_tree/tasks/call_actor_method_task.gd"
+}, {
 "base": "BTBehaviourNode",
 "class": "BTComposite",
 "language": "GDScript",
@@ -243,6 +248,7 @@ _global_script_class_icons={
 "BTBlackboardBehaviourNode": "",
 "BTBlackboardCondition": "",
 "BTBlackboardProperty": "",
+"BTCallActorMethodTask": "",
 "BTComposite": "",
 "BTDecorator": "",
 "BTMoveToTask": "",
