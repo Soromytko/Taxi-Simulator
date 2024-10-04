@@ -56,6 +56,8 @@ func get_vehicle() -> Vehicle:
 func get_into_vehicle_instantly(vehicle : Vehicle, seat_key : String):
 	$CollisionShape.disabled = true
 	$NavigationAgent.roadway_name = "CarRoadway"
+	# TODO: It should depend on the car.
+	$NavigationAgent.radius = 3
 	$DriveMovementController.vehicle = vehicle
 	$MovementController.set_physics_process(false)
 	_vehicle_blackboard_property.value = vehicle
@@ -72,6 +74,7 @@ func get_into_vehicle_instantly(vehicle : Vehicle, seat_key : String):
 func get_out_of_vehicle_instantly():
 	$CollisionShape.disabled = false
 	$NavigationAgent.roadway_name = "PedestrianRoadway"
+	$NavigationAgent.radius = $CollisionShape.shape.radius
 	$DriveMovementController.vehicle = null
 	$MovementController.set_physics_process(true)
 	_vehicle_blackboard_property.value = null
