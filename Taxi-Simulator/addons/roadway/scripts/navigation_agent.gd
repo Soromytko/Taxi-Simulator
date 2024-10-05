@@ -86,6 +86,8 @@ func _init_roadway():
 
 func _enter_tree():
 	_init_roadway()
+	# Randomize the initial value of _frame_counter to distribute the load.
+	_frame_counter = TimedRNG.new().randi_range(0, _frame_delay)
 
 
 # Returns true if the path is correct
