@@ -1,4 +1,4 @@
-extends BTNodeWithBlackboard
+extends BTBehaviourNodeWithBlackboard
 class_name BTBehaviourNode
 
 enum TickResult {

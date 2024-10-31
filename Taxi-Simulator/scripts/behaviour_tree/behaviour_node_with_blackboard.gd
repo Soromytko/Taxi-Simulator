@@ -1,5 +1,5 @@
 extends Node
-class_name BTNodeWithBlackboard
+class_name BTBehaviourNodeWithBlackboard
 
 const ACTOR_PROPERTY_NAME := "actor"
 
