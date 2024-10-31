@@ -230,6 +230,16 @@ _global_script_classes=[ {
 "path": "res://addons/roadway/scripts/roadway.gd"
 }, {
 "base": "Node",
+"class": "Stat",
+"language": "GDScript",
+"path": "res://scripts/stats/stat.gd"
+}, {
+"base": "Label",
+"class": "StatLabel",
+"language": "GDScript",
+"path": "res://scripts/stats/stat_label.gd"
+}, {
+"base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://scripts/state_machine/state_machine.gd"
@@ -314,6 +324,8 @@ _global_script_class_icons={
 "RWUtils": "",
 "RiderCharacter": "",
 "Roadway": "",
+"Stat": "",
+"StatLabel": "",
 "StateMachine": "",
 "StateMachineState": "",
 "TaxiCar": "",
