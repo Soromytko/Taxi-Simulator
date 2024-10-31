@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/state_machine/state_machine.gd" type="Script" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://scripts/player/states/drive_state.gd" type="Script" id=10]
 [ext_resource path="res://scenes/prefabs/interaction/interactor.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scripts/bank/bank_client.gd" type="Script" id=12]
+[ext_resource path="res://scripts/stats/stat.gd" type="Script" id=13]
+[ext_resource path="res://scripts/stats/stat_label.gd" type="Script" id=14]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.301
@@ -93,3 +95,46 @@ margin_top = 20.0
 margin_right = 61.0
 margin_bottom = 34.0
 text = "12 $"
+
+[node name="StaminaStat" type="Node" parent="."]
+script = ExtResource( 13 )
+
+[node name="HungerStat" type="Node" parent="."]
+script = ExtResource( 13 )
+
+[node name="StatsUI" type="GridContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -100.0
+margin_top = 29.0
+margin_right = -21.0
+margin_bottom = 136.0
+columns = 2
+
+[node name="StaminaLabel" type="Label" parent="StatsUI"]
+margin_right = 51.0
+margin_bottom = 14.0
+text = "Stamina"
+
+[node name="StaminaValueLabel" type="Label" parent="StatsUI"]
+margin_left = 55.0
+margin_right = 79.0
+margin_bottom = 14.0
+text = "100"
+script = ExtResource( 14 )
+_stat_node_path = NodePath("../../StaminaStat")
+
+[node name="HungerLabel" type="Label" parent="StatsUI"]
+margin_top = 18.0
+margin_right = 51.0
+margin_bottom = 32.0
+text = "Hunger"
+
+[node name="HungerValueLabel" type="Label" parent="StatsUI"]
+margin_left = 55.0
+margin_top = 18.0
+margin_right = 79.0
+margin_bottom = 32.0
+text = "100"
+script = ExtResource( 14 )
+_stat_node_path = NodePath("../../HungerStat")
